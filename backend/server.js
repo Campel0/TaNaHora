@@ -1,13 +1,16 @@
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
 
 const usuarioRoutes = require("./routes/usuarioRoutes");
-const authRoutes = require("./routes/authRoutes");
-const recuperarSenhaRoutes = require("./routes/recuperarSenhaRoutes");
 const medicamentoRoutes = require("./routes/medicamentoRoutes");
 const notificacaoRoutes = require("./routes/notificacaoRoutes");
 const historicoRoutes = require("./routes/historicoRoutes");
+const authRoutes = require("./routes/authRoutes");
+const recuperarSenhaRoutes = require("./routes/recuperarSenhaRoutes");
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -20,6 +23,7 @@ app.use("/usuarios", usuarioRoutes);
 app.use("/medicamentos", medicamentoRoutes);
 app.use("/notificacoes", notificacaoRoutes);
 app.use("/historico", historicoRoutes);
+
 app.use("/", authRoutes);
 app.use("/", recuperarSenhaRoutes);
 
