@@ -4,6 +4,7 @@ const app = express();
 const usuarioRoutes = require("./routes/usuarioRoutes");
 const authRoutes = require("./routes/authRoutes");
 const recuperarSenhaRoutes = require("./routes/recuperarSenhaRoutes");
+const medicamentoRoutes = require("./routes/medicamentoRoutes");
 
 app.use(express.json());
 
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/usuarios", usuarioRoutes);
+app.use("/medicamentos", medicamentoRoutes);
 app.use("/", authRoutes);
 app.use("/", recuperarSenhaRoutes);
 
