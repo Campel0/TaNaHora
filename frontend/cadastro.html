@@ -1,12 +1,28 @@
-<h1>Cadastro</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TaNaHora - Cadastro</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
 
-<input id="nome" placeholder="Nome">
-<input id="email" placeholder="Email">
-<input id="senha" placeholder="Senha">
+  <h1>Cadastro de Usuário</h1>
 
-<button onclick="cadastrar()">Cadastrar</button>
+  <input id="nome" placeholder="Nome">
+  <input id="email" placeholder="E-mail">
+  <input id="senha" type="password" placeholder="Senha">
 
-<p id="mensagem"></p>
+  <button onclick="cadastrar()">Cadastrar</button>
 
-<script src="./js/api.js"></script>
-<script src="./js/usuario.js"></script>
+  <p id="mensagem"></p>
+
+  <p>
+    Já possui conta?
+    <a href="./index.html">Entrar</a>
+  </p>
+
+  <script src="./js/api.js"></script>
+  <script src="./js/usuario.js"></script>
+
+</body>
+</html>

@@ -4,9 +4,9 @@ async function cadastrar() {
   const senha = document.getElementById("senha").value;
 
   const resposta = await fetch(`${API_URL}/usuarios`, {
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json"
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({ nome, email, senha })
   });
@@ -15,4 +15,10 @@ async function cadastrar() {
 
   document.getElementById("mensagem").innerText =
     dados.mensagem;
+
+  if (resposta.status === 201) {
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1500);
+  }
 }
