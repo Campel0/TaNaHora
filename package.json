@@ -1,0 +1,27 @@
+{
+  "name": "tanahora",
+  "version": "1.0.0",
+  "description": "Sistema para gerenciamento e acompanhamento de medicamentos.",
+  "main": "index.js",
+  "scripts": {
+    "backend": "node backend/server.js",
+    "frontend": "http-server ./frontend -p 8080",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Campel0/TaNaHora.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Campel0/TaNaHora/issues"
+  },
+  "homepage": "https://github.com/Campel0/TaNaHora#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "http-server": "^14.1.1"
+  }
+}
