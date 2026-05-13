@@ -19,17 +19,22 @@ async function login() {
 
     mensagem.innerText = dados.mensagem;
 
-    if (resposta.status === 200) {
+    if (resposta.ok) {
       mensagem.style.color = "green";
 
+      console.log("Login OK - redirecionando...");
+
       setTimeout(() => {
-        window.location.href = "medicamentos.html";
+        window.location.href = "./medicamentos.html";
       }, 1000);
+
     } else {
       mensagem.style.color = "red";
     }
 
   } catch (erro) {
+    console.error(erro);
+
     mensagem.innerText = "Erro ao conectar com o servidor";
     mensagem.style.color = "red";
   }
