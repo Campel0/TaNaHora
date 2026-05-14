@@ -6,10 +6,11 @@ async function carregarHistorico() {
     // 1. Usamos a função wrapper para injetar o Token automaticamente
     const resposta = await fetchAutenticado("/historico");
     
-    // Se o acesso for negado, a própria função cuida do redirecionamento
-    if (!resposta || !resposta.ok) return;
+    // Se a resposta for nula (ex: redirecionamento de token inválido), paramos aqui
+    if (!resposta) return;
 
-    // 2. Extraímos os dados em formato JSON
+    // 2. Extraímos os dados em formato JSON, mesmo se for erro 404, 
+    // pois o backend manda a { mensagem: "Nenhum registro..." }
     const dados = await resposta.json();
 
     // 3. Selecionamos o elemento HTML que receberá a lista
