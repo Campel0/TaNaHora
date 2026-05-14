@@ -179,6 +179,45 @@ button:active {
   margin-top: 10px;
 }
 
+/* --- MENU GLOBAL --- */
+.menu {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 12px 10px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 1px solid var(--glass-border);
+}
+
+.menu-item {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-shadow: none;
+}
+
+.menu-item.ativo {
+  color: var(--text-main);
+  background: var(--primary-color);
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+}
+
+.menu-item.sair {
+  color: #ff4b4b;
+}
+.menu-item.sair:hover {
+  background: rgba(255, 75, 75, 0.1);
+}
+
 /* --- MENSAGENS E LISTAS --- */
 #mensagem {
   margin-top: 15px;
