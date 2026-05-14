@@ -155,6 +155,30 @@ button:active {
   transform: translateY(1px);
 }
 
+/* Modificadores de botões */
+.btn-success {
+  background: linear-gradient(45deg, #00b09b, #96c93d);
+  box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3);
+}
+.btn-success:hover {
+  box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5);
+}
+
+.btn-danger {
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+}
+.btn-danger:hover {
+  box-shadow: 0 6px 20px rgba(255, 75, 43, 0.5);
+}
+
+/* Container de botões laterais (para as notificações) */
+.botoes-acao {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
 /* --- MENSAGENS E LISTAS --- */
 #mensagem {
   margin-top: 15px;

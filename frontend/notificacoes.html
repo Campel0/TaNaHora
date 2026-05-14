@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaNaHora - Notificações</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>TaNaHora</h1>
+    <h2>Hora do Remédio! ⏰</h2>
+
+    <!-- Div onde as notificações serão carregadas dinamicamente via JS -->
+    <ul id="listaNotificacoes"></ul>
+
+    <p>
+      <a href="./historico.html">Ver Histórico</a>
+    </p>
+
+    <p>
+      <a href="./medicamentos.html">Voltar para Medicamentos</a>
+    </p>
+  </div>
+
+  <!-- A ordem importa: primeiro o api.js (para ter o fetchAutenticado) depois o script da página -->
+  <script src="./js/api.js"></script>
+  <script src="./js/notificacao.js"></script>
+
+</body>
+</html>
