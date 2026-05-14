@@ -19,10 +19,14 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/usuarios", usuarioRoutes);
-app.use("/medicamentos", medicamentoRoutes);
-app.use("/notificacoes", notificacaoRoutes);
-app.use("/historico", historicoRoutes);
+app.use("/usuarios", usuarioRoutes); // Cadastro de usuário deve ser público
+// Importamos o middleware de autenticação
+const { authMiddleware } = require("./middlewares/authMiddleware");
+
+// As rotas abaixo passam a exigir um Token válido para serem acessadas
+app.use("/medicamentos", authMiddleware, medicamentoRoutes);
+app.use("/notificacoes", authMiddleware, notificacaoRoutes);
+app.use("/historico", authMiddleware, historicoRoutes);
 
 app.use("/", authRoutes);
 app.use("/", recuperarSenhaRoutes);
