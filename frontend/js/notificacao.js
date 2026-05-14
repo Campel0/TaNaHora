@@ -62,7 +62,8 @@ async function carregarNotificacoes() {
 async function registrarStatus(id, status) {
   try {
     // 1. Dispara um POST enviando no corpo do JSON o ID e a ação escolhida
-    const resposta = await fetchAutenticado("/notificacoes", {
+    // A rota correta no backend é /notificacoes/status
+    const resposta = await fetchAutenticado("/notificacoes/status", {
       method: "POST",
       body: JSON.stringify({
         medicamentoId: id,
