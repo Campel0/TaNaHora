@@ -47,3 +47,57 @@ async function fetchAutenticado(endpoint, opcoes = {}) {
   // 7. Retornamos a resposta para quem chamou essa função lidar com os dados
   return resposta;
 }
+
+/**
+ * Exibe uma notificação amigável na tela (Toast)
+ */
+function showToast(mensagem, tipo = "sucesso") {
+  // Cria o container se não existir
+  let container = document.getElementById("toast-container");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "toast-container";
+    Object.assign(container.style, {
+      position: "fixed",
+      bottom: "20px",
+      right: "20px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "10px",
+      zIndex: "9999"
+    });
+    document.body.appendChild(container);
+  }
+
+  // Cria a notificação
+  const toast = document.createElement("div");
+  toast.innerText = mensagem;
+  Object.assign(toast.style, {
+    minWidth: "250px",
+    padding: "16px",
+    borderRadius: "8px",
+    color: "#fff",
+    fontSize: "14px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+    transform: "translateX(100%)",
+    opacity: "0",
+    transition: "all 0.3s ease",
+    background: tipo === "sucesso" ? "#10b981" : "#ef4444",
+    fontFamily: "system-ui, -apple-system, sans-serif"
+  });
+
+  container.appendChild(toast);
+
+  // Animação de entrada
+  setTimeout(() => {
+    toast.style.transform = "translateX(0)";
+    toast.style.opacity = "1";
+  }, 10);
+
+  // Animação de saída
+  setTimeout(() => {
+    toast.style.transform = "translateX(100%)";
+    toast.style.opacity = "0";
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}

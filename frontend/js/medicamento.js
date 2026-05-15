@@ -16,7 +16,7 @@ async function cadastrarMedicamento() {
     });
 
     if (resposta.ok) {
-      alert("Medicamento cadastrado com sucesso!");
+      showToast("Medicamento cadastrado com sucesso!");
       // 3. Limpamos os campos do formulário
       document.getElementById("nome").value = "";
       document.getElementById("dosagem").value = "";
@@ -26,11 +26,11 @@ async function cadastrarMedicamento() {
       listarMedicamentos();
     } else {
       const dadosErro = await resposta.json();
-      alert(`Erro ao cadastrar: ${dadosErro.mensagem}`);
+      showToast(`Erro ao cadastrar: ${dadosErro.mensagem}`, "erro");
     }
   } catch (erro) {
     console.error("Erro na requisição:", erro);
-    alert("Não foi possível conectar ao servidor.");
+    showToast("Não foi possível conectar ao servidor.", "erro");
   }
 }
 
@@ -60,11 +60,42 @@ async function listarMedicamentos() {
 
     // 5. Varremos (loop) os dados recebidos para criar os elementos de lista
     dados.forEach(medicamento => {
-      // Usamos Template Literals (``) do JS Moderno para interpolar variáveis
-      lista.innerHTML += `<li><strong>${medicamento.nome}</strong> - ${medicamento.dosagem} (a cada ${medicamento.intervalo}h)</li>`;
+      lista.innerHTML += `
+        <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
+          <span><strong>${medicamento.nome}</strong> - ${medicamento.dosagem} (a cada ${medicamento.intervalo}h)</span>
+          <div style="display: flex; gap: 8px;">
+            <button onclick="excluirMedicamento(${medicamento.id})" style="background: #ef4444; padding: 4px 8px; font-size: 12px; border-radius: 4px;">Excluir</button>
+          </div>
+        </li>
+      `;
     });
   } catch (erro) {
     console.error("Erro ao listar medicamentos:", erro);
+    showToast("Erro ao carregar medicamentos.", "erro");
+  }
+}
+
+/**
+ * Exclui um medicamento do backend
+ */
+async function excluirMedicamento(id) {
+  if (!confirm("Tem certeza que deseja excluir este medicamento?")) return;
+
+  try {
+    const resposta = await fetchAutenticado(`/medicamentos/${id}`, {
+      method: "DELETE"
+    });
+
+    if (resposta.ok) {
+      showToast("Medicamento excluído com sucesso!");
+      listarMedicamentos(); // Atualiza a lista
+    } else {
+      const dadosErro = await resposta.json();
+      showToast(`Erro ao excluir: ${dadosErro.mensagem}`, "erro");
+    }
+  } catch (erro) {
+    console.error("Erro ao excluir medicamento:", erro);
+    showToast("Erro de conexão ao excluir.", "erro");
   }
 }
 
