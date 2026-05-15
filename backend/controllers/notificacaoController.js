@@ -25,8 +25,9 @@ function listarNotificacoes(req, res) {
       const ultimaDose = historicoMedicamento[0];
       ultimaDoseStr = `${ultimaDose.data} às ${ultimaDose.hora}`;
       
-      if (ultimaDose.timestamp && medicamento.intervalo) {
-         const proximaDoseTimestamp = ultimaDose.timestamp + (medicamento.intervalo * 60 * 60 * 1000);
+      const intervaloHoras = parseInt(medicamento.intervalo);
+      if (ultimaDose.timestamp && !isNaN(intervaloHoras)) {
+         const proximaDoseTimestamp = ultimaDose.timestamp + (intervaloHoras * 60 * 60 * 1000);
          const proximaDoseData = new Date(proximaDoseTimestamp);
          proximaDoseStr = `${proximaDoseData.toLocaleDateString()} às ${proximaDoseData.toLocaleTimeString()}`;
       }
