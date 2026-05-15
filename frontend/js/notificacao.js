@@ -35,6 +35,11 @@ async function carregarNotificacoes() {
         <li>
           <strong>💊 ${notificacao.mensagem}</strong>
           
+          <div style="font-size: 13px; margin: 10px 0; color: #555; background: #f9f9f9; padding: 8px; border-radius: 4px; border-left: 3px solid #0ea5e9;">
+            <div style="margin-bottom: 4px;">Última vez: <strong>${notificacao.ultimaDose}</strong></div>
+            <div>Próximo horário: <strong style="color: #0ea5e9;">${notificacao.proximaDose}</strong></div>
+          </div>
+
           <div class="botoes-acao">
             <button class="btn-success" onclick="registrarStatus('${notificacao.medicamentoId}', 'Tomado')">
               ✔️ Tomado

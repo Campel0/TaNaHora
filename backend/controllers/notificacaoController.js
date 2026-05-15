@@ -10,11 +10,36 @@ function listarNotificacoes(req, res) {
     });
   }
 
-  const notificacoes = medicamentos.map(medicamento => ({
-    medicamentoId: medicamento.id,
-    mensagem: `Tomar ${medicamento.nome} - ${medicamento.dosagem}`,
-    horarios: medicamento.horarios
-  }));
+  const historico = historicoDb.get();
+
+  const notificacoes = medicamentos.map(medicamento => {
+    // Busca o histórico de tomadas desse medicamento, ordenando do mais recente para o mais antigo
+    const historicoMedicamento = historico
+      .filter(h => h.medicamentoId == medicamento.id && h.status === "Tomado")
+      .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+    let ultimaDoseStr = "Ainda não tomado";
+    let proximaDoseStr = "Tomar agora";
+
+    if (historicoMedicamento.length > 0) {
+      const ultimaDose = historicoMedicamento[0];
+      ultimaDoseStr = `${ultimaDose.data} às ${ultimaDose.hora}`;
+      
+      if (ultimaDose.timestamp && medicamento.intervalo) {
+         const proximaDoseTimestamp = ultimaDose.timestamp + (medicamento.intervalo * 60 * 60 * 1000);
+         const proximaDoseData = new Date(proximaDoseTimestamp);
+         proximaDoseStr = `${proximaDoseData.toLocaleDateString()} às ${proximaDoseData.toLocaleTimeString()}`;
+      }
+    }
+
+    return {
+      medicamentoId: medicamento.id,
+      mensagem: `Tomar ${medicamento.nome} - ${medicamento.dosagem}`,
+      horarios: medicamento.horarios,
+      ultimaDose: ultimaDoseStr,
+      proximaDose: proximaDoseStr
+    };
+  });
 
   return res.status(200).json(notificacoes);
 }
@@ -53,6 +78,7 @@ function registrarStatus(req, res) {
     medicamento: medicamento.nome,
     data: new Date().toLocaleDateString(),
     hora: new Date().toLocaleTimeString(),
+    timestamp: Date.now(),
     status
   };
 
