@@ -1,4 +1,5 @@
 const usuariosDb = require("../data/usuarios");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../middlewares/authMiddleware");
 
@@ -15,7 +16,7 @@ function login(req, res) {
   // 2. Busca o usuário no "banco" (no momento, o arquivo JSON)
   const usuarios = usuariosDb.get();
   const usuario = usuarios.find(
-    u => u.email === email && u.senha === senha
+    u => u.email === email && bcrypt.compareSync(senha, u.senha)
   );
 
   // 3. Se não encontrou, retorna erro de autenticação

@@ -1,4 +1,5 @@
 const usuariosDb = require("../data/usuarios");
+const bcrypt = require("bcryptjs");
 
 function listarUsuarios(req, res) {
   res.status(200).json(usuariosDb.get());
@@ -27,10 +28,10 @@ function cadastrarUsuario(req, res) {
   }
 
   const novoUsuario = {
-    id: usuarios.length + 1,
+    id: usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id)) + 1 : 1,
     nome,
     email,
-    senha
+    senha: bcrypt.hashSync(senha, 10)
   };
 
   usuarios.push(novoUsuario);
