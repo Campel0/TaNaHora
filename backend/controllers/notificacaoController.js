@@ -2,7 +2,8 @@ const medicamentosDb = require("../data/medicamentos");
 const historicoDb = require("../data/historico");
 
 function listarNotificacoes(req, res) {
-  const medicamentos = medicamentosDb.get();
+  const usuarioId = req.usuarioLogado.id;
+  const medicamentos = medicamentosDb.get().filter(m => m.usuarioId === usuarioId);
   if (medicamentos.length === 0) {
     return res.status(404).json({
       mensagem: "Nenhum medicamento cadastrado"
@@ -35,7 +36,7 @@ function registrarStatus(req, res) {
 
   const medicamentos = medicamentosDb.get();
   const medicamento = medicamentos.find(
-    m => m.id == medicamentoId
+    m => m.id == medicamentoId && m.usuarioId === req.usuarioLogado.id
   );
 
   if (!medicamento) {
@@ -47,6 +48,7 @@ function registrarStatus(req, res) {
   const historico = historicoDb.get();
   const registro = {
     id: historico.length > 0 ? Math.max(...historico.map(h => h.id)) + 1 : 1,
+    usuarioId: req.usuarioLogado.id,
     medicamentoId,
     medicamento: medicamento.nome,
     data: new Date().toLocaleDateString(),

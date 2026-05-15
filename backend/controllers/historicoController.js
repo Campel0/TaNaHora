@@ -1,7 +1,7 @@
 const historicoDb = require("../data/historico");
 
 function listarHistorico(req, res) {
-  const historico = historicoDb.get();
+  const historico = historicoDb.get().filter(h => h.usuarioId === req.usuarioLogado.id);
   if (historico.length === 0) {
     return res.status(404).json({
       mensagem: "Nenhum registro de administração encontrado"
@@ -16,7 +16,7 @@ function buscarHistoricoPorMedicamento(req, res) {
 
   const historico = historicoDb.get();
   const registros = historico.filter(
-    h => h.medicamentoId == medicamentoId
+    h => h.medicamentoId == medicamentoId && h.usuarioId === req.usuarioLogado.id
   );
 
   if (registros.length === 0) {

@@ -1,7 +1,9 @@
 const medicamentosDb = require("../data/medicamentos");
 
 function listarMedicamentos(req, res) {
-  return res.status(200).json(medicamentosDb.get());
+  const usuarioId = req.usuarioLogado.id;
+  const medicamentos = medicamentosDb.get().filter(m => m.usuarioId === usuarioId);
+  return res.status(200).json(medicamentos);
 }
 
 function buscarMedicamento(req, res) {
@@ -9,7 +11,7 @@ function buscarMedicamento(req, res) {
 
   const medicamentos = medicamentosDb.get();
   const medicamento = medicamentos.find(
-    m => m.id == id
+    m => m.id == id && m.usuarioId === req.usuarioLogado.id
   );
 
   if (!medicamento) {
@@ -33,6 +35,7 @@ function cadastrarMedicamento(req, res) {
   const medicamentos = medicamentosDb.get();
   const novoMedicamento = {
     id: medicamentos.length > 0 ? Math.max(...medicamentos.map(m => m.id)) + 1 : 1,
+    usuarioId: req.usuarioLogado.id,
     nome,
     dosagem,
     intervalo,
@@ -54,7 +57,7 @@ function atualizarMedicamento(req, res) {
 
   const medicamentos = medicamentosDb.get();
   const medicamento = medicamentos.find(
-    m => m.id == id
+    m => m.id == id && m.usuarioId === req.usuarioLogado.id
   );
 
   if (!medicamento) {
@@ -81,7 +84,7 @@ function deletarMedicamento(req, res) {
 
   const medicamentos = medicamentosDb.get();
   const index = medicamentos.findIndex(
-    m => m.id == id
+    m => m.id == id && m.usuarioId === req.usuarioLogado.id
   );
 
   if (index === -1) {
