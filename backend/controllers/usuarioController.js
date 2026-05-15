@@ -1,7 +1,7 @@
-const usuarios = require("../data/usuarios");
+const usuariosDb = require("../data/usuarios");
 
 function listarUsuarios(req, res) {
-  res.status(200).json(usuarios);
+  res.status(200).json(usuariosDb.get());
 }
 
 function cadastrarUsuario(req, res) {
@@ -15,6 +15,7 @@ function cadastrarUsuario(req, res) {
   }
 
   // valida email duplicado
+  const usuarios = usuariosDb.get();
   const usuarioExistente = usuarios.find(
     usuario => usuario.email === email
   );
@@ -33,6 +34,7 @@ function cadastrarUsuario(req, res) {
   };
 
   usuarios.push(novoUsuario);
+  usuariosDb.set(usuarios);
 
   return res.status(201).json({
     mensagem: "Cadastro realizado com sucesso",

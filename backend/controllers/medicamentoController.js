@@ -1,12 +1,13 @@
-const medicamentos = require("../data/medicamentos");
+const medicamentosDb = require("../data/medicamentos");
 
 function listarMedicamentos(req, res) {
-  return res.status(200).json(medicamentos);
+  return res.status(200).json(medicamentosDb.get());
 }
 
 function buscarMedicamento(req, res) {
   const { id } = req.params;
 
+  const medicamentos = medicamentosDb.get();
   const medicamento = medicamentos.find(
     m => m.id == id
   );
@@ -29,8 +30,9 @@ function cadastrarMedicamento(req, res) {
     });
   }
 
+  const medicamentos = medicamentosDb.get();
   const novoMedicamento = {
-    id: medicamentos.length + 1,
+    id: medicamentos.length > 0 ? Math.max(...medicamentos.map(m => m.id)) + 1 : 1,
     nome,
     dosagem,
     intervalo,
@@ -38,6 +40,7 @@ function cadastrarMedicamento(req, res) {
   };
 
   medicamentos.push(novoMedicamento);
+  medicamentosDb.set(medicamentos);
 
   return res.status(201).json({
     mensagem: "Medicamento cadastrado com sucesso",
@@ -49,6 +52,7 @@ function atualizarMedicamento(req, res) {
   const { id } = req.params;
   const { nome, dosagem, intervalo, horarios } = req.body;
 
+  const medicamentos = medicamentosDb.get();
   const medicamento = medicamentos.find(
     m => m.id == id
   );
@@ -64,6 +68,8 @@ function atualizarMedicamento(req, res) {
   medicamento.intervalo = intervalo || medicamento.intervalo;
   medicamento.horarios = horarios || medicamento.horarios;
 
+  medicamentosDb.set(medicamentos);
+
   return res.status(200).json({
     mensagem: "Medicamento atualizado com sucesso",
     medicamento
@@ -73,6 +79,7 @@ function atualizarMedicamento(req, res) {
 function deletarMedicamento(req, res) {
   const { id } = req.params;
 
+  const medicamentos = medicamentosDb.get();
   const index = medicamentos.findIndex(
     m => m.id == id
   );
@@ -84,6 +91,7 @@ function deletarMedicamento(req, res) {
   }
 
   medicamentos.splice(index, 1);
+  medicamentosDb.set(medicamentos);
 
   return res.status(200).json({
     mensagem: "Medicamento removido com sucesso"

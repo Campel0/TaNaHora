@@ -1,4 +1,4 @@
-const usuarios = require("../data/usuarios");
+const usuariosDb = require("../data/usuarios");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../middlewares/authMiddleware");
 
@@ -12,7 +12,8 @@ function login(req, res) {
     });
   }
 
-  // 2. Busca o usuário no "banco" (no momento, o array em memória)
+  // 2. Busca o usuário no "banco" (no momento, o arquivo JSON)
+  const usuarios = usuariosDb.get();
   const usuario = usuarios.find(
     u => u.email === email && u.senha === senha
   );

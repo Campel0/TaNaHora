@@ -1,4 +1,4 @@
-const usuarios = require("../data/usuarios");
+const usuariosDb = require("../data/usuarios");
 
 function recuperarSenha(req, res) {
   const { email } = req.body;
@@ -9,6 +9,7 @@ function recuperarSenha(req, res) {
     });
   }
 
+  const usuarios = usuariosDb.get();
   const usuario = usuarios.find(
     u => u.email === email
   );

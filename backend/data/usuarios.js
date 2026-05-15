@@ -1,3 +1,6 @@
-const usuarios = [];
+const { readData, writeData } = require('./fileDb');
 
-module.exports = usuarios;
+module.exports = {
+  get: () => readData('usuarios.json'),
+  set: (data) => writeData('usuarios.json', data)
+};

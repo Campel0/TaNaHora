@@ -1,7 +1,8 @@
-const medicamentos = require("../data/medicamentos");
-const historico = require("../data/historico");
+const medicamentosDb = require("../data/medicamentos");
+const historicoDb = require("../data/historico");
 
 function listarNotificacoes(req, res) {
+  const medicamentos = medicamentosDb.get();
   if (medicamentos.length === 0) {
     return res.status(404).json({
       mensagem: "Nenhum medicamento cadastrado"
@@ -32,6 +33,7 @@ function registrarStatus(req, res) {
     });
   }
 
+  const medicamentos = medicamentosDb.get();
   const medicamento = medicamentos.find(
     m => m.id == medicamentoId
   );
@@ -42,8 +44,9 @@ function registrarStatus(req, res) {
     });
   }
 
+  const historico = historicoDb.get();
   const registro = {
-    id: historico.length + 1,
+    id: historico.length > 0 ? Math.max(...historico.map(h => h.id)) + 1 : 1,
     medicamentoId,
     medicamento: medicamento.nome,
     data: new Date().toLocaleDateString(),
@@ -52,6 +55,7 @@ function registrarStatus(req, res) {
   };
 
   historico.push(registro);
+  historicoDb.set(historico);
 
   return res.status(200).json({
     mensagem: "Status registrado com sucesso",

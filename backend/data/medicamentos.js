@@ -1,3 +1,6 @@
-const medicamentos = [];
+const { readData, writeData } = require('./fileDb');
 
-module.exports = medicamentos;
+module.exports = {
+  get: () => readData('medicamentos.json'),
+  set: (data) => writeData('medicamentos.json', data)
+};
