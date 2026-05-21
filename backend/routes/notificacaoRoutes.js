@@ -7,6 +7,7 @@ const {
 } = require("../controllers/notificacaoController");
 
 router.get("/", listarNotificacoes);
+router.post("/", registrarStatus);
 router.post("/status", registrarStatus);
 
 module.exports = router;

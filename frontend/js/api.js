@@ -15,7 +15,7 @@ async function fetchAutenticado(endpoint, opcoes = {}) {
 
   // 2. Se o usuário não tem token, forçamos ele a voltar para a tela de login
   if (!token) {
-    window.location.replace("/index.html");
+    window.location.replace("index.html");
     return;
   }
 
@@ -41,7 +41,7 @@ async function fetchAutenticado(endpoint, opcoes = {}) {
     // Limpamos os dados locais e mandamos o usuário fazer login de novo
     localStorage.removeItem("token_tanahora");
     localStorage.removeItem("usuario_tanahora");
-    window.location.replace("/index.html");
+    window.location.replace("index.html");
   }
 
   // 7. Retornamos a resposta para quem chamou essa função lidar com os dados

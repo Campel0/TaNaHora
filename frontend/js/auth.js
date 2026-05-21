@@ -43,7 +43,7 @@ async function login() {
 
       // 6. Após 1 segundo de espera, redirecionamos para a tela principal
       setTimeout(() => {
-        window.location.replace("/medicamentos.html");
+        window.location.replace("medicamentos.html");
       }, 1000);
 
     } else {
@@ -57,4 +57,4 @@ async function login() {
     mensagem.innerText = "Erro ao conectar com o servidor. Tente novamente mais tarde.";
     mensagem.style.color = "red";
   }
-}
+}
