@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "usuarioId": 1,
+    "medicamentoId": "1",
+    "medicamento": "Dipirona",
+    "data": "27/05/2026",
+    "hora": "20:27:42",
+    "status": "Tomado"
+  },
+  {
+    "id": 2,
+    "usuarioId": 1,
+    "medicamentoId": "1",
+    "medicamento": "Dipirona",
+    "data": "27/05/2026",
+    "hora": "20:28:06",
+    "status": "Pular"
+  }
+]

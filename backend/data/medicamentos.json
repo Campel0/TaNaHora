@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "usuarioId": 1,
+    "nome": "Dipirona",
+    "dosagem": "100mg",
+    "intervalo": "8",
+    "horaInicio": "20:27",
+    "horarios": []
+  }
+]
