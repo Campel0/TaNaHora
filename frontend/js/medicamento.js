@@ -2,35 +2,43 @@
  * Cadastra um novo medicamento utilizando o fetchAutenticado (com token JWT).
  */
 async function cadastrarMedicamento() {
-  // 1. Pegamos os valores dos campos
+  // 1. Pegamos os valores dos campos do formulário
   const nome = document.getElementById("nome").value;
   const dosagem = document.getElementById("dosagem").value;
   const intervalo = document.getElementById("intervalo").value;
+  const horaInicio = document.getElementById("horaInicio").value; // Horário da primeira dose
+
+  // Validação simples com feedback via Toast
+  if (!nome || !dosagem || !intervalo || !horaInicio) {
+    mostrarToast("Todos os campos, incluindo a hora de início, são obrigatórios.", "erro");
+    return;
+  }
 
   try {
     // 2. Usamos nossa função wrapper (que já insere o Token) para enviar os dados
     const resposta = await fetchAutenticado("/medicamentos", {
       method: "POST",
-      // O fetchAutenticado já define o Content-Type: application/json
-      body: JSON.stringify({ nome, dosagem, intervalo })
+      // Enviamos a hora de início no corpo da requisição
+      body: JSON.stringify({ nome, dosagem, intervalo, horaInicio })
     });
 
     if (resposta.ok) {
-      alert("Medicamento cadastrado com sucesso!");
+      mostrarToast("Medicamento cadastrado com sucesso!", "sucesso");
       // 3. Limpamos os campos do formulário
       document.getElementById("nome").value = "";
       document.getElementById("dosagem").value = "";
       document.getElementById("intervalo").value = "";
+      document.getElementById("horaInicio").value = "";
       
       // 4. Atualizamos a listagem para mostrar o novo item
       listarMedicamentos();
     } else {
       const dadosErro = await resposta.json();
-      alert(`Erro ao cadastrar: ${dadosErro.mensagem}`);
+      mostrarToast(`Erro ao cadastrar: ${dadosErro.mensagem}`, "erro");
     }
   } catch (erro) {
     console.error("Erro na requisição:", erro);
-    alert("Não foi possível conectar ao servidor.");
+    mostrarToast("Não foi possível conectar ao servidor.", "erro");
   }
 }
 
@@ -60,15 +68,16 @@ async function listarMedicamentos() {
 
     // 5. Varremos (loop) os dados recebidos para criar os elementos de lista com botões de ação
     dados.forEach(medicamento => {
-      // Injetamos um template literal contendo o texto do remédio e os botões
-      // que chamam abrirEdicao() e deletarMedicamento() passando o ID do remédio correspondente.
+      // Injetamos um template literal contendo o texto do remédio, a hora inicial
+      // e os botões que chamam abrirEdicao() e deletarMedicamento().
       lista.innerHTML += `
         <li>
           <div>
             <strong>💊 ${medicamento.nome}</strong> - ${medicamento.dosagem} (a cada ${medicamento.intervalo}h)
+            ${medicamento.horaInicio ? `<br><small style="color: var(--text-muted); font-size: 13px; display: block; margin-top: 4px;">⏰ Primeira dose: ${medicamento.horaInicio}</small>` : ''}
           </div>
-          <div class="botoes-acao" style="margin-top: 10px;">
-            <button class="btn-editar" onclick="abrirEdicao('${medicamento.id}', '${medicamento.nome}', '${medicamento.dosagem}', '${medicamento.intervalo}')">
+          <div class="botoes-acao" style="margin-top: 12px;">
+            <button class="btn-editar" onclick="abrirEdicao('${medicamento.id}', '${medicamento.nome}', '${medicamento.dosagem}', '${medicamento.intervalo}', '${medicamento.horaInicio || ''}')">
               ✏️ Editar
             </button>
             <button class="btn-danger" style="padding: 10px; font-size: 13px;" onclick="deletarMedicamento('${medicamento.id}')">
@@ -100,28 +109,29 @@ async function deletarMedicamento(id) {
     });
 
     if (resposta.ok) {
-      alert("Medicamento removido com sucesso!");
+      mostrarToast("Medicamento removido com sucesso!", "sucesso");
       // Atualizamos a lista de medicamentos na tela após a exclusão
       listarMedicamentos();
     } else {
       const dadosErro = await resposta.json();
-      alert(`Erro ao remover: ${dadosErro.mensagem}`);
+      mostrarToast(`Erro ao remover: ${dadosErro.mensagem}`, "erro");
     }
   } catch (erro) {
     console.error("Erro ao deletar:", erro);
-    alert("Erro de conexão ao remover o medicamento.");
+    mostrarToast("Erro de conexão ao remover o medicamento.", "erro");
   }
 }
 
 /**
  * Abre o modal de edição de medicamento preenchendo os campos com os dados atuais.
  */
-function abrirEdicao(id, nome, dosagem, intervalo) {
+function abrirEdicao(id, nome, dosagem, intervalo, horaInicio) {
   // Preenchemos os campos do formulário do modal com as informações do medicamento selecionado
   document.getElementById("edit-id").value = id;
   document.getElementById("edit-nome").value = nome;
   document.getElementById("edit-dosagem").value = dosagem;
   document.getElementById("edit-intervalo").value = intervalo;
+  document.getElementById("edit-horaInicio").value = horaInicio;
 
   // Alteramos a propriedade de exibição do CSS para tornar o modal visível na tela
   document.getElementById("modal-edicao").style.display = "block";
@@ -139,6 +149,7 @@ function fecharEdicao() {
   document.getElementById("edit-nome").value = "";
   document.getElementById("edit-dosagem").value = "";
   document.getElementById("edit-intervalo").value = "";
+  document.getElementById("edit-horaInicio").value = "";
 }
 
 /**
@@ -150,10 +161,11 @@ async function salvarEdicao() {
   const nome = document.getElementById("edit-nome").value;
   const dosagem = document.getElementById("edit-dosagem").value;
   const intervalo = document.getElementById("edit-intervalo").value;
+  const horaInicio = document.getElementById("edit-horaInicio").value;
 
   // Validação básica no lado do cliente
-  if (!nome || !dosagem || !intervalo) {
-    alert("Todos os campos devem ser preenchidos para salvar.");
+  if (!nome || !dosagem || !intervalo || !horaInicio) {
+    mostrarToast("Todos os campos devem ser preenchidos para salvar.", "erro");
     return;
   }
 
@@ -161,24 +173,26 @@ async function salvarEdicao() {
     // Fazemos a requisição PUT assíncrona para a rota '/medicamentos/:id'
     const resposta = await fetchAutenticado(`/medicamentos/${id}`, {
       method: "PUT",
-      body: JSON.stringify({ nome, dosagem, intervalo })
+      body: JSON.stringify({ nome, dosagem, intervalo, horaInicio })
     });
 
     if (resposta.ok) {
-      alert("Medicamento atualizado com sucesso!");
+      mostrarToast("Medicamento atualizado com sucesso!", "sucesso");
       // Fechamos o formulário de edição
       fecharEdicao();
       // Recarregamos a listagem atualizada na tela
       listarMedicamentos();
     } else {
       const dadosErro = await resposta.json();
-      alert(`Erro ao atualizar: ${dadosErro.mensagem}`);
+      mostrarToast(`Erro ao atualizar: ${dadosErro.mensagem}`, "erro");
     }
   } catch (erro) {
     console.error("Erro ao salvar edição:", erro);
-    alert("Erro de conexão ao salvar alterações.");
+    mostrarToast("Erro de conexão ao salvar alterações.", "erro");
   }
 }
 
 // Ao abrir a página, já disparamos a função para listar
-listarMedicamentos();
+listarMedicamentos();
+
+

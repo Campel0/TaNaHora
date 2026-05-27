@@ -47,3 +47,46 @@ async function fetchAutenticado(endpoint, opcoes = {}) {
   // 7. Retornamos a resposta para quem chamou essa função lidar com os dados
   return resposta;
 }
+
+/**
+ * Exibe um Toast temporário estilizado na tela para dar feedback ao usuário.
+ * 
+ * @param {string} mensagem - A mensagem a ser exibida.
+ * @param {string} tipo - O tipo do feedback ("sucesso", "erro", "info").
+ */
+function mostrarToast(mensagem, tipo = "info") {
+  // 1. Buscamos se já existe um container de Toasts no HTML da página ativa
+  let container = document.querySelector(".toast-container");
+  
+  // 2. Se não existir, criamos o container dinamicamente e anexamos no final do body
+  if (!container) {
+    container = document.createElement("div");
+    container.className = "toast-container";
+    document.body.appendChild(container);
+  }
+
+  // 3. Criamos o elemento de Toast individual
+  const toast = document.createElement("div");
+  // Aplicamos a classe CSS 'toast' e o tipo específico ('sucesso', 'erro' ou 'info')
+  toast.className = `toast ${tipo}`;
+  
+  // Definimos o emoji indicador com base no status da operação
+  let emoji = "ℹ️";
+  if (tipo === "sucesso") emoji = "✅";
+  if (tipo === "erro") emoji = "❌";
+
+  // Montamos o HTML interno do toast com o emoji e a mensagem de texto
+  toast.innerHTML = `<span>${emoji}</span> <span>${mensagem}</span>`;
+
+  // 4. Adicionamos o Toast na fila do container
+  container.appendChild(toast);
+
+  // 5. Definimos um timer de 3 segundos (3000ms) para remover o elemento após a animação de saída sumir da tela
+  setTimeout(() => {
+    toast.remove();
+    // Se o container de toasts ficar vazio, nós o removemos do DOM para limpar o documento
+    if (container.children.length === 0) {
+      container.remove();
+    }
+  }, 3000);
+}

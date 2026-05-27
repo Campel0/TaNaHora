@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaNaHora - Recuperar Senha</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>TaNaHora</h1>
+    <h2>Recuperação de Senha</h2>
+
+    <p style="margin-bottom: 20px; text-align: left;">
+      Insira o seu e-mail cadastrado abaixo para receber um link de recuperação de senha.
+    </p>
+
+    <!-- Campo de E-mail para localizar o usuário -->
+    <input id="email" type="email" placeholder="Digite seu e-mail cadastrado" required>
+
+    <button onclick="solicitarRecuperacao()">Enviar Link</button>
+
+    <p id="mensagem"></p>
+
+    <p>
+      Lembrou a senha?
+      <a href="./index.html">Voltar para o Login</a>
+    </p>
+  </div>
+
+  <!-- Importamos o script da API global e o script específico desta página -->
+  <script src="./js/api.js"></script>
+  <script src="./js/recuperar.js"></script>
+
+</body>
+</html>

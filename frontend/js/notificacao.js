@@ -49,7 +49,7 @@ async function carregarNotificacoes() {
 
   } catch (erro) {
     console.error("Erro ao carregar notificações:", erro);
-    alert("Erro de conexão ao buscar as notificações.");
+    mostrarToast("Erro de conexão ao buscar as notificações.", "erro");
   }
 }
 
@@ -75,22 +75,23 @@ async function registrarStatus(id, status) {
     const dados = await resposta.json();
 
     if (resposta.ok) {
-      // 3. Sucesso! Mostra um alerta com a mensagem do servidor
-      alert(`✅ Sucesso: ${dados.mensagem}`);
+      // 3. Sucesso! Mostra um Toast com a mensagem do servidor
+      mostrarToast(dados.mensagem, "sucesso");
       
       // 4. Se o usuário já tomou, idealmente podemos recarregar a lista
       // ou apenas esconder o item atual. Por simplicidade, vamos recarregar tudo.
       carregarNotificacoes();
     } else {
       // Caso dê algum erro de validação (ex: enviou status inválido)
-      alert(`⚠️ Erro: ${dados.mensagem}`);
+      mostrarToast(`Erro: ${dados.mensagem}`, "erro");
     }
 
   } catch (erro) {
     console.error("Erro ao registrar status:", erro);
-    alert("Erro de comunicação ao registrar o status.");
+    mostrarToast("Erro de comunicação ao registrar o status.", "erro");
   }
 }
 
 // Carrega as notificações logo que a página HTML for aberta
 carregarNotificacoes();
+

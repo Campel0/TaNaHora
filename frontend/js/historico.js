@@ -35,9 +35,9 @@ async function carregarHistorico() {
   } catch (erro) {
     // 6. Tratamento de erro robusto caso o servidor não responda
     console.error("Erro ao carregar histórico:", erro);
-    alert("Não foi possível carregar o histórico.");
+    mostrarToast("Não foi possível carregar o histórico.", "erro");
   }
 }
 
 // Ao abrir a página, carregamos o histórico automaticamente
-carregarHistorico();
+carregarHistorico();

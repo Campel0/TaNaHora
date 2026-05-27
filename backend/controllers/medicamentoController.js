@@ -42,22 +42,23 @@ function buscarMedicamento(req, res) {
  * Cadastra um novo medicamento vinculando-o ao usuário logado.
  */
 function cadastrarMedicamento(req, res) {
-  const { nome, dosagem, intervalo, horarios } = req.body;
+  const { nome, dosagem, intervalo, horarios, horaInicio } = req.body;
   const usuarioId = req.usuarioLogado.id;
 
-  if (!nome || !dosagem || !intervalo) {
+  if (!nome || !dosagem || !intervalo || !horaInicio) {
     return res.status(400).json({
-      mensagem: "Nome, dosagem e intervalo são obrigatórios"
+      mensagem: "Nome, dosagem, intervalo e horário inicial são obrigatórios"
     });
   }
 
-  // Criamos o novo objeto inserindo o 'usuarioId' para criar o vínculo relacional
+  // Criamos o novo objeto inserindo o 'usuarioId' e 'horaInicio'
   const novoMedicamento = {
     id: medicamentos.length + 1,
     usuarioId, // Identifica a quem pertence este remédio
     nome,
     dosagem,
     intervalo,
+    horaInicio, // Armazena a hora de início configurada
     horarios: horarios || []
   };
 
@@ -78,7 +79,7 @@ function cadastrarMedicamento(req, res) {
  */
 function atualizarMedicamento(req, res) {
   const { id } = req.params;
-  const { nome, dosagem, intervalo, horarios } = req.body;
+  const { nome, dosagem, intervalo, horarios, horaInicio } = req.body;
   const usuarioId = req.usuarioLogado.id;
 
   // Procuramos o remédio garantindo que seja do usuário autenticado
@@ -97,6 +98,7 @@ function atualizarMedicamento(req, res) {
   medicamento.dosagem = dosagem || medicamento.dosagem;
   medicamento.intervalo = intervalo || medicamento.intervalo;
   medicamento.horarios = horarios || medicamento.horarios;
+  medicamento.horaInicio = horaInicio || medicamento.horaInicio;
 
   // Salva a lista atualizada de medicamentos no disco
   salvarDados("medicamentos.json", medicamentos);

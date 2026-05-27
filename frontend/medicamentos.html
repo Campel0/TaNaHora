@@ -23,6 +23,8 @@
     <input id="nome" type="text" placeholder="Nome do medicamento">
     <input id="dosagem" type="text" placeholder="Dosagem (ex: 500mg)">
     <input id="intervalo" type="text" placeholder="Intervalo (ex: 8h)">
+    <label for="horaInicio" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted); text-align: left; padding-left: 5px;">Horário da Primeira Dose:</label>
+    <input id="horaInicio" type="time">
 
     <button onclick="cadastrarMedicamento()">
       Cadastrar Medicamento
@@ -39,6 +41,8 @@
         <input id="edit-nome" type="text" placeholder="Nome do medicamento">
         <input id="edit-dosagem" type="text" placeholder="Dosagem (ex: 500mg)">
         <input id="edit-intervalo" type="text" placeholder="Intervalo (ex: 8h)">
+        <label for="edit-horaInicio" style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-muted); text-align: left; padding-left: 5px;">Horário da Primeira Dose:</label>
+        <input id="edit-horaInicio" type="time">
         
         <div class="botoes-acao">
           <button onclick="salvarEdicao()" class="btn-success">Salvar Alterações</button>
