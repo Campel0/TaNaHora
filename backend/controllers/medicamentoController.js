@@ -1,4 +1,6 @@
 const medicamentos = require("../data/medicamentos");
+// Importamos a função salvarDados do dbHelper para gravar as alterações em disco
+const { salvarDados } = require("../data/dbHelper");
 
 function listarMedicamentos(req, res) {
   return res.status(200).json(medicamentos);
@@ -37,7 +39,11 @@ function cadastrarMedicamento(req, res) {
     horarios: horarios || []
   };
 
+  // Adiciona o novo medicamento ao array em memória
   medicamentos.push(novoMedicamento);
+
+  // Salva a lista atualizada de medicamentos no arquivo 'medicamentos.json'
+  salvarDados("medicamentos.json", medicamentos);
 
   return res.status(201).json({
     mensagem: "Medicamento cadastrado com sucesso",
@@ -59,10 +65,14 @@ function atualizarMedicamento(req, res) {
     });
   }
 
+  // Atualiza as propriedades se elas foram enviadas no body
   medicamento.nome = nome || medicamento.nome;
   medicamento.dosagem = dosagem || medicamento.dosagem;
   medicamento.intervalo = intervalo || medicamento.intervalo;
   medicamento.horarios = horarios || medicamento.horarios;
+
+  // Salva a lista atualizada de medicamentos com o item alterado no disco
+  salvarDados("medicamentos.json", medicamentos);
 
   return res.status(200).json({
     mensagem: "Medicamento atualizado com sucesso",
@@ -83,7 +93,11 @@ function deletarMedicamento(req, res) {
     });
   }
 
+  // Remove o medicamento da lista em memória
   medicamentos.splice(index, 1);
+
+  // Salva a lista atualizada (sem o item removido) no arquivo 'medicamentos.json'
+  salvarDados("medicamentos.json", medicamentos);
 
   return res.status(200).json({
     mensagem: "Medicamento removido com sucesso"
@@ -96,4 +110,4 @@ module.exports = {
   cadastrarMedicamento,
   atualizarMedicamento,
   deletarMedicamento
-};
+};

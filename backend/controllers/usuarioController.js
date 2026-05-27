@@ -1,4 +1,6 @@
 const usuarios = require("../data/usuarios");
+// Importamos a função salvarDados do dbHelper para gravar as alterações em disco
+const { salvarDados } = require("../data/dbHelper");
 
 function listarUsuarios(req, res) {
   res.status(200).json(usuarios);
@@ -32,13 +34,18 @@ function cadastrarUsuario(req, res) {
     senha
   };
 
+  // Adicionamos o novo usuário na lista em memória
   usuarios.push(novoUsuario);
+  
+  // Gravamos a lista atualizada de usuários no arquivo 'usuarios.json' no disco
+  salvarDados("usuarios.json", usuarios);
 
   return res.status(201).json({
     mensagem: "Cadastro realizado com sucesso",
     usuario: novoUsuario
   });
 }
+
 
 module.exports = {
   listarUsuarios,

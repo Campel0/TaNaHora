@@ -1,5 +1,7 @@
 const medicamentos = require("../data/medicamentos");
 const historico = require("../data/historico");
+// Importamos a função salvarDados do dbHelper para gravar as alterações em disco
+const { salvarDados } = require("../data/dbHelper");
 
 function listarNotificacoes(req, res) {
   if (medicamentos.length === 0) {
@@ -51,7 +53,11 @@ function registrarStatus(req, res) {
     status
   };
 
+  // Adicionamos o registro na lista de histórico em memória
   historico.push(registro);
+
+  // Gravamos o histórico atualizado no arquivo 'historico.json' no disco
+  salvarDados("historico.json", historico);
 
   return res.status(200).json({
     mensagem: "Status registrado com sucesso",
@@ -62,4 +68,4 @@ function registrarStatus(req, res) {
 module.exports = {
   listarNotificacoes,
   registrarStatus
-};
+};
