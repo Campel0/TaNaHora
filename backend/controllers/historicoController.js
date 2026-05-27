@@ -1,20 +1,35 @@
 const historico = require("../data/historico");
 
+/**
+ * Retorna o histórico de administração de medicamentos apenas do usuário logado.
+ */
 function listarHistorico(req, res) {
-  if (historico.length === 0) {
+  const usuarioId = req.usuarioLogado.id;
+
+  // Filtramos os registros do histórico associados ao usuário logado
+  const meuHistorico = historico.filter(
+    h => h.usuarioId === usuarioId
+  );
+
+  if (meuHistorico.length === 0) {
     return res.status(404).json({
       mensagem: "Nenhum registro de administração encontrado"
     });
   }
 
-  return res.status(200).json(historico);
+  return res.status(200).json(meuHistorico);
 }
 
+/**
+ * Retorna o histórico de um medicamento específico, garantindo que pertença ao usuário logado.
+ */
 function buscarHistoricoPorMedicamento(req, res) {
   const { medicamentoId } = req.params;
+  const usuarioId = req.usuarioLogado.id;
 
+  // Filtramos os registros comparando o ID do remédio e confirmando que pertença ao usuário ativo
   const registros = historico.filter(
-    h => h.medicamentoId == medicamentoId
+    h => h.medicamentoId == medicamentoId && h.usuarioId === usuarioId
   );
 
   if (registros.length === 0) {
@@ -29,4 +44,4 @@ function buscarHistoricoPorMedicamento(req, res) {
 module.exports = {
   listarHistorico,
   buscarHistoricoPorMedicamento
-};
+};
