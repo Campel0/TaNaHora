@@ -30,10 +30,27 @@
 
     <ul id="lista"></ul>
 
+    <!-- Modal para Edição de Medicamentos (oculto por padrão via CSS/Style) -->
+    <div id="modal-edicao" class="modal" style="display: none;">
+      <div class="modal-conteudo">
+        <h2>Editar Medicamento</h2>
+        <!-- Input invisível para guardar o ID do medicamento que estamos editando -->
+        <input id="edit-id" type="hidden">
+        <input id="edit-nome" type="text" placeholder="Nome do medicamento">
+        <input id="edit-dosagem" type="text" placeholder="Dosagem (ex: 500mg)">
+        <input id="edit-intervalo" type="text" placeholder="Intervalo (ex: 8h)">
+        
+        <div class="botoes-acao">
+          <button onclick="salvarEdicao()" class="btn-success">Salvar Alterações</button>
+          <button onclick="fecharEdicao()" class="btn-danger">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script src="./js/api.js"></script>
   <script src="./js/medicamento.js"></script>
 
 </body>
-</html>
+</html>
