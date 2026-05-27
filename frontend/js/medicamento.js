@@ -63,17 +63,37 @@ async function listarMedicamentos() {
       lista.innerHTML += `
         <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
           <span><strong>${medicamento.nome}</strong> - ${medicamento.dosagem} (a cada ${medicamento.intervalo}h)</span>
-          <div style="display: flex; gap: 8px;">
-            <button onclick="excluirMedicamento(${medicamento.id})" style="background: #ef4444; padding: 4px 8px; font-size: 12px; border-radius: 4px;">Excluir</button>
-          </div>
+         <div style="display: flex; gap: 7px;">
+
+  <!-- botões de editar e excluir -->   
+         
+  <button onclick="editarMedicamento(${medicamento.id})"
+    style=" background: #189c65;padding: 3px 7px;font-size: 12px;border-radius: 4px;border: none;color: white;cursor: pointer;">
+    Editar
+  </button>
+
+  <button
+    onclick="excluirMedicamento(${medicamento.id})"
+    style="background: #ef4444;padding: 3px 7px;font-size: 12px;border-radius: 4px;border: none;color: white;cursor: pointer;">
+    Excluir
+  </button>
+
+</div>
         </li>
       `;
     });
   } catch (erro) {
     console.error("Erro ao listar medicamentos:", erro);
-    showToast("Erro ao carregar medicamentos.", "erro");
+    showToast("Erro ao carregar medicamentos.", "erro"); 
+    // Mensagem de erro  para o usuário
   }
 }
+
+// Função para redirecionar para a página de edição do medicamento
+async function editarMedicamento(id) {
+  window.location.href = `editarMedicamento.html?id=${id}`;
+}
+
 
 /**
  * Exclui um medicamento do backend
@@ -98,6 +118,7 @@ async function excluirMedicamento(id) {
     showToast("Erro de conexão ao excluir.", "erro");
   }
 }
+
 
 // Ao abrir a página, já disparamos a função para listar
 listarMedicamentos();

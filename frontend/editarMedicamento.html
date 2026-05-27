@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Medicamento</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>TaNaHora</h1>
+
+    <nav class="menu">
+      <a href="medicamentos.html" class="menu-item ativo">Remédios</a>
+      <a href="notificacoes.html" class="menu-item">Avisos</a>
+      <a href="historico.html" class="menu-item">Histórico</a>
+      <a href="index.html" class="menu-item sair">Sair</a>
+    </nav>
+
+    <h2>Editar Medicamento</h2>
+
+    <input id="nome" type="text" placeholder="Nome do medicamento">
+
+    <input id="dosagem" type="text" placeholder="Dosagem (ex: 500mg)">
+
+    <input id="intervalo" type="text" placeholder="Intervalo (ex: 8h)">
+
+    <button type="button" onclick="atualizarMedicamento()">
+     Atualizar Medicamento
+    </button>
+
+  </div>
+
+  <script src="./js/api.js"></script>
+  <script src="./js/editarMedicamento.js"></script>
+
+</body>
+</html>
