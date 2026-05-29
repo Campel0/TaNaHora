@@ -1,47 +1,41 @@
-const historico = require("../data/historico");
+const pool = require("../db");
 
-/**
- * Retorna o histórico de administração de medicamentos apenas do usuário logado.
- */
-function listarHistorico(req, res) {
+async function listarHistorico(req, res) {
   const usuarioId = req.usuarioLogado.id;
 
-  // Filtramos os registros do histórico associados ao usuário logado
-  const meuHistorico = historico.filter(
-    h => h.usuarioId === usuarioId
-  );
+  try {
+    const result = await pool.query("SELECT * FROM historico WHERE usuario_id = $1", [usuarioId]);
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ mensagem: "Nenhum registro de administração encontrado" });
+    }
 
-  if (meuHistorico.length === 0) {
-    return res.status(404).json({
-      mensagem: "Nenhum registro de administração encontrado"
-    });
+    return res.status(200).json(result.rows);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensagem: "Erro ao listar histórico" });
   }
-
-  return res.status(200).json(meuHistorico);
 }
 
-/**
- * Retorna o histórico de um medicamento específico, garantindo que pertença ao usuário logado.
- */
-function buscarHistoricoPorMedicamento(req, res) {
+async function buscarHistoricoPorMedicamento(req, res) {
   const { medicamentoId } = req.params;
   const usuarioId = req.usuarioLogado.id;
 
-  // Filtramos os registros comparando o ID do remédio e confirmando que pertença ao usuário ativo
-  const registros = historico.filter(
-    h => h.medicamentoId == medicamentoId && h.usuarioId === usuarioId
-  );
+  try {
+    const result = await pool.query("SELECT * FROM historico WHERE medicamento_id = $1 AND usuario_id = $2", [medicamentoId, usuarioId]);
 
-  if (registros.length === 0) {
-    return res.status(404).json({
-      mensagem: "Nenhum registro encontrado para este medicamento"
-    });
+    if (result.rows.length === 0) {
+      return res.status(404).json({ mensagem: "Nenhum registro encontrado para este medicamento" });
+    }
+
+    return res.status(200).json(result.rows);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensagem: "Erro ao buscar histórico por medicamento" });
   }
-
-  return res.status(200).json(registros);
 }
 
 module.exports = {
   listarHistorico,
   buscarHistoricoPorMedicamento
-};
+};

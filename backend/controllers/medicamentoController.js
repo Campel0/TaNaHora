@@ -1,47 +1,32 @@
-const medicamentos = require("../data/medicamentos");
-// Importamos a função salvarDados do dbHelper para gravar as alterações em disco
-const { salvarDados } = require("../data/dbHelper");
+const pool = require("../db");
 
-/**
- * Retorna a lista de medicamentos apenas do usuário que está logado.
- */
-function listarMedicamentos(req, res) {
-  // O 'authMiddleware' colocou as informações do usuário em 'req.usuarioLogado'
+async function listarMedicamentos(req, res) {
   const usuarioId = req.usuarioLogado.id;
-
-  // Filtramos a lista completa de medicamentos, mantendo somente aqueles que possuem o mesmo usuarioId do token
-  const meusMedicamentos = medicamentos.filter(
-    m => m.usuarioId === usuarioId
-  );
-
-  return res.status(200).json(meusMedicamentos);
+  try {
+    const result = await pool.query("SELECT * FROM medicamentos WHERE usuario_id = $1", [usuarioId]);
+    return res.status(200).json(result.rows);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensagem: "Erro ao listar medicamentos" });
+  }
 }
 
-/**
- * Busca um medicamento específico pelo ID, garantindo que ele pertença ao usuário logado.
- */
-function buscarMedicamento(req, res) {
+async function buscarMedicamento(req, res) {
   const { id } = req.params;
   const usuarioId = req.usuarioLogado.id;
-
-  // Procuramos o remédio comparando o ID do medicamento e garantindo que ele pertença ao usuário ativo
-  const medicamento = medicamentos.find(
-    m => m.id == id && m.usuarioId === usuarioId
-  );
-
-  if (!medicamento) {
-    return res.status(404).json({
-      mensagem: "Medicamento não encontrado"
-    });
+  try {
+    const result = await pool.query("SELECT * FROM medicamentos WHERE id = $1 AND usuario_id = $2", [id, usuarioId]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ mensagem: "Medicamento não encontrado" });
+    }
+    return res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensagem: "Erro ao buscar medicamento" });
   }
-
-  return res.status(200).json(medicamento);
 }
 
-/**
- * Cadastra um novo medicamento vinculando-o ao usuário logado.
- */
-function cadastrarMedicamento(req, res) {
+async function cadastrarMedicamento(req, res) {
   const { nome, dosagem, intervalo, horarios, horaInicio } = req.body;
   const usuarioId = req.usuarioLogado.id;
 
@@ -51,91 +36,74 @@ function cadastrarMedicamento(req, res) {
     });
   }
 
-  // Criamos o novo objeto inserindo o 'usuarioId' e 'horaInicio'
-  const novoMedicamento = {
-    id: medicamentos.length + 1,
-    usuarioId, // Identifica a quem pertence este remédio
-    nome,
-    dosagem,
-    intervalo,
-    horaInicio, // Armazena a hora de início configurada
-    horarios: horarios || []
-  };
+  try {
+    const result = await pool.query(
+      `INSERT INTO medicamentos (usuario_id, nome, dosagem, intervalo, hora_inicio, horarios) 
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [usuarioId, nome, dosagem, intervalo, horaInicio, horarios || []]
+    );
 
-  // Adiciona o novo medicamento ao array em memória
-  medicamentos.push(novoMedicamento);
-
-  // Salva a lista atualizada de medicamentos no arquivo 'medicamentos.json'
-  salvarDados("medicamentos.json", medicamentos);
-
-  return res.status(201).json({
-    mensagem: "Medicamento cadastrado com sucesso",
-    medicamento: novoMedicamento
-  });
+    return res.status(201).json({
+      mensagem: "Medicamento cadastrado com sucesso",
+      medicamento: result.rows[0]
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensagem: "Erro ao cadastrar medicamento" });
+  }
 }
 
-/**
- * Atualiza os dados de um medicamento, validando a propriedade do usuário logado.
- */
-function atualizarMedicamento(req, res) {
+async function atualizarMedicamento(req, res) {
   const { id } = req.params;
   const { nome, dosagem, intervalo, horarios, horaInicio } = req.body;
   const usuarioId = req.usuarioLogado.id;
 
-  // Procuramos o remédio garantindo que seja do usuário autenticado
-  const medicamento = medicamentos.find(
-    m => m.id == id && m.usuarioId === usuarioId
-  );
+  try {
+    const check = await pool.query("SELECT * FROM medicamentos WHERE id = $1 AND usuario_id = $2", [id, usuarioId]);
+    if (check.rows.length === 0) {
+      return res.status(404).json({ mensagem: "Medicamento não encontrado ou acesso não autorizado" });
+    }
 
-  if (!medicamento) {
-    return res.status(404).json({
-      mensagem: "Medicamento não encontrado ou acesso não autorizado"
+    const current = check.rows[0];
+    const newNome = nome || current.nome;
+    const newDosagem = dosagem || current.dosagem;
+    const newIntervalo = intervalo || current.intervalo;
+    const newHorarios = horarios || current.horarios;
+    const newHoraInicio = horaInicio || current.hora_inicio;
+
+    const result = await pool.query(
+      `UPDATE medicamentos 
+       SET nome = $1, dosagem = $2, intervalo = $3, horarios = $4, hora_inicio = $5 
+       WHERE id = $6 AND usuario_id = $7 RETURNING *`,
+      [newNome, newDosagem, newIntervalo, newHorarios, newHoraInicio, id, usuarioId]
+    );
+
+    return res.status(200).json({
+      mensagem: "Medicamento atualizado com sucesso",
+      medicamento: result.rows[0]
     });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensagem: "Erro ao atualizar medicamento" });
   }
-
-  // Atualiza as propriedades se elas foram enviadas no corpo da requisição
-  medicamento.nome = nome || medicamento.nome;
-  medicamento.dosagem = dosagem || medicamento.dosagem;
-  medicamento.intervalo = intervalo || medicamento.intervalo;
-  medicamento.horarios = horarios || medicamento.horarios;
-  medicamento.horaInicio = horaInicio || medicamento.horaInicio;
-
-  // Salva a lista atualizada de medicamentos no disco
-  salvarDados("medicamentos.json", medicamentos);
-
-  return res.status(200).json({
-    mensagem: "Medicamento atualizado com sucesso",
-    medicamento
-  });
 }
 
-/**
- * Remove um medicamento da lista, validando a propriedade do usuário logado.
- */
-function deletarMedicamento(req, res) {
+async function deletarMedicamento(req, res) {
   const { id } = req.params;
   const usuarioId = req.usuarioLogado.id;
 
-  // Encontra o index do medicamento correspondente e que pertença ao usuário ativo
-  const index = medicamentos.findIndex(
-    m => m.id == id && m.usuarioId === usuarioId
-  );
+  try {
+    const result = await pool.query("DELETE FROM medicamentos WHERE id = $1 AND usuario_id = $2 RETURNING *", [id, usuarioId]);
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ mensagem: "Medicamento não encontrado ou acesso não autorizado" });
+    }
 
-  if (index === -1) {
-    return res.status(404).json({
-      mensagem: "Medicamento não encontrado ou acesso não autorizado"
-    });
+    return res.status(200).json({ mensagem: "Medicamento removido com sucesso" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ mensagem: "Erro ao deletar medicamento" });
   }
-
-  // Remove o medicamento da lista em memória
-  medicamentos.splice(index, 1);
-
-  // Salva a lista atualizada (sem o item removido) no arquivo 'medicamentos.json'
-  salvarDados("medicamentos.json", medicamentos);
-
-  return res.status(200).json({
-    mensagem: "Medicamento removido com sucesso"
-  });
 }
 
 module.exports = {
