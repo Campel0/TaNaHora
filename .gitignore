@@ -19,3 +19,4 @@ Thumbs.db
 # IDEs (VSCode, etc)
 .vscode/
 .idea/
+repomix-output.xml
