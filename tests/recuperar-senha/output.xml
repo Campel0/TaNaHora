@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.14.5 on win32)" generated="2026-06-01T21:49:30.708836" rpa="false" schemaversion="5">
+<suite id="s1" name="Recuperar Senha" source="C:\Users\luizg\Desktop\Projetos\TaNaHora\tests\recuperar-senha\recuperar_senha.robot">
+<kw name="Open Browser" owner="SeleniumLibrary" type="SETUP">
+<msg time="2026-06-01T21:49:31.037295" level="INFO">Opening browser 'chrome' to base url 'http://localhost:3001/recuperar-senha.html'.</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-01T21:49:31.036982" elapsed="2.119491"/>
+</kw>
+<test id="s1-t1" name="CT01 - Deve validar email vazio" line="17">
+<kw name="Navegar para a tela de recuperar senha" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-01T21:49:33.157873" level="INFO">Opening url 'http://localhost:3001/recuperar-senha.html'</msg>
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-01T21:49:33.157691" elapsed="0.026963"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-01T21:49:33.184861" elapsed="0.031779"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EL_EMAIL}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-01T21:49:33.216919" elapsed="0.681996"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:33.157349" elapsed="0.741693"/>
+</kw>
+<kw name="Dado que o usuario informa o email">
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${EL_EMAIL}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-01T21:49:33.899860" elapsed="0.045319"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${valor}' != '${EMPTY}'</arg>
+<arg>Input Text</arg>
+<arg>${EL_EMAIL}</arg>
+<arg>${valor}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2026-06-01T21:49:33.945399" elapsed="0.000831"/>
+</kw>
+<arg>${EMPTY}</arg>
+<status status="PASS" start="2026-06-01T21:49:33.899252" elapsed="0.047083"/>
+</kw>
+<kw name="Quando solicitar a recuperacao">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-01T21:49:33.946956" level="INFO">Clicking element 'xpath=//button[contains(text(),'Enviar Link')]'.</msg>
+<arg>${EL_BOTAO}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-01T21:49:33.946733" elapsed="0.118989"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-01T21:49:36.066735" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-01T21:49:34.065914" elapsed="2.001111"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:33.946490" elapsed="2.120822"/>
+</kw>
+<kw name="Entao o sistema deve apresentar a mensagem">
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>${EL_MENSAGEM}</arg>
+<arg>${texto_esperado}</arg>
+<arg>timeout=7s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-06-01T21:49:36.068612" elapsed="0.070727"/>
+</kw>
+<arg>Digite o e-mail</arg>
+<status status="PASS" start="2026-06-01T21:49:36.067787" elapsed="0.072165"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:33.156728" elapsed="2.983859"/>
+</test>
+<test id="s1-t2" name="CT02 - Deve validar email nao cadastrado" line="22">
+<kw name="Navegar para a tela de recuperar senha" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-01T21:49:36.145027" level="INFO">Opening url 'http://localhost:3001/recuperar-senha.html'</msg>
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-01T21:49:36.144595" elapsed="0.051878"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-01T21:49:36.196743" elapsed="0.005079"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EL_EMAIL}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-01T21:49:36.202118" elapsed="0.535501"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:36.143583" elapsed="0.594748"/>
+</kw>
+<kw name="Dado que o usuario informa o email">
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${EL_EMAIL}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-01T21:49:36.740475" elapsed="0.085398"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-01T21:49:36.829312" level="INFO">Typing text 'naoexiste@email.com' into text field 'id=email'.</msg>
+<arg>${EL_EMAIL}</arg>
+<arg>${valor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-01T21:49:36.828528" elapsed="0.257376"/>
+</kw>
+<arg>'${valor}' != '${EMPTY}'</arg>
+<arg>Input Text</arg>
+<arg>${EL_EMAIL}</arg>
+<arg>${valor}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2026-06-01T21:49:36.826355" elapsed="0.259869"/>
+</kw>
+<arg>naoexiste@email.com</arg>
+<status status="PASS" start="2026-06-01T21:49:36.739180" elapsed="0.347293"/>
+</kw>
+<kw name="Quando solicitar a recuperacao">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-01T21:49:37.088803" level="INFO">Clicking element 'xpath=//button[contains(text(),'Enviar Link')]'.</msg>
+<arg>${EL_BOTAO}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-01T21:49:37.088128" elapsed="0.129955"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-01T21:49:39.221477" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-01T21:49:37.218585" elapsed="2.003510"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:37.087307" elapsed="2.135520"/>
+</kw>
+<kw name="Entao o sistema deve apresentar a mensagem">
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>${EL_MENSAGEM}</arg>
+<arg>${texto_esperado}</arg>
+<arg>timeout=7s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-06-01T21:49:39.225439" elapsed="0.037320"/>
+</kw>
+<arg>E-mail não encontrado</arg>
+<status status="PASS" start="2026-06-01T21:49:39.223666" elapsed="0.039331"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:36.142255" elapsed="3.120979"/>
+</test>
+<test id="s1-t3" name="CT03 - Deve enviar link para email cadastrado" line="27">
+<kw name="Navegar para a tela de recuperar senha" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-01T21:49:39.265024" level="INFO">Opening url 'http://localhost:3001/recuperar-senha.html'</msg>
+<arg>${URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-01T21:49:39.264799" elapsed="0.055116"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-01T21:49:39.320919" elapsed="0.011274"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${EL_EMAIL}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-01T21:49:39.332772" elapsed="0.511517"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:39.264380" elapsed="0.580172"/>
+</kw>
+<kw name="Dado que o usuario informa o email">
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${EL_EMAIL}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-01T21:49:39.845739" elapsed="0.082914"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-01T21:49:39.931295" level="INFO">Typing text 'usuario_cadastrado@email.com' into text field 'id=email'.</msg>
+<arg>${EL_EMAIL}</arg>
+<arg>${valor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-01T21:49:39.930798" elapsed="0.159811"/>
+</kw>
+<arg>'${valor}' != '${EMPTY}'</arg>
+<arg>Input Text</arg>
+<arg>${EL_EMAIL}</arg>
+<arg>${valor}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2026-06-01T21:49:39.929283" elapsed="0.161516"/>
+</kw>
+<arg>usuario_cadastrado@email.com</arg>
+<status status="PASS" start="2026-06-01T21:49:39.844977" elapsed="0.245964"/>
+</kw>
+<kw name="Quando solicitar a recuperacao">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-01T21:49:40.092288" level="INFO">Clicking element 'xpath=//button[contains(text(),'Enviar Link')]'.</msg>
+<arg>${EL_BOTAO}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-01T21:49:40.091761" elapsed="0.094128"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-01T21:49:42.189876" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-01T21:49:40.186559" elapsed="2.003653"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:40.091220" elapsed="2.099328"/>
+</kw>
+<kw name="Entao o sistema deve apresentar a mensagem">
+<kw name="Wait Until Element Contains" owner="SeleniumLibrary">
+<arg>${EL_MENSAGEM}</arg>
+<arg>${texto_esperado}</arg>
+<arg>timeout=7s</arg>
+<doc>Waits until the element ``locator`` contains ``text``.</doc>
+<status status="PASS" start="2026-06-01T21:49:42.192052" elapsed="0.041606"/>
+</kw>
+<arg>Link enviado para o e-mail</arg>
+<status status="PASS" start="2026-06-01T21:49:42.191100" elapsed="0.042797"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:39.263699" elapsed="2.970447"/>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-06-01T21:49:42.235661" elapsed="2.416689"/>
+</kw>
+<status status="PASS" start="2026-06-01T21:49:30.710589" elapsed="13.942010"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Recuperar Senha" id="s1" pass="3" fail="0" skip="0">Recuperar Senha</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
