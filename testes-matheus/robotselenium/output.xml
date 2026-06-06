@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.14.0 on win32)" generated="2026-06-03T00:26:02.526601" rpa="false" schemaversion="5">
+<suite id="s1" name="Notificacoes" source="C:\Users\Windows\Documents\GitHub\TaNaHora\testes-matheus\robotselenium\notificacoes.robot">
+<test id="s1-t1" name="CT01 - Deve registrar medicamento como Tomado pela tela de notificações" line="30">
+<kw name="Dado que o usuário está autenticado com medicamento cadastrado">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:02.988079" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:8080/index.html'.</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-03T00:26:02.987775" elapsed="1.045746"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-03T00:26:04.033811" elapsed="0.412091"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${INPUT_EMAIL}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:04.446149" elapsed="0.453725"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:04.900479" level="INFO">Typing text 'matheus@email.com' into text field 'id=email'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${EMAIL_COM_MEDICAMENTO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:04.900106" elapsed="0.156629"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:05.057932" level="INFO">Typing password into text field 'id=senha'.</msg>
+<msg time="2026-06-03T00:26:05.092417" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_SENHA}</arg>
+<arg>${SENHA_COM_MEDICAMENTO}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:05.057028" elapsed="0.091512"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:05.149015" level="INFO">Clicking button 'xpath=//button[contains(., "Entrar")]'.</msg>
+<arg>${BOTAO_ENTRAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:05.148729" elapsed="0.083886"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T00:26:07.233842" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T00:26:05.232843" elapsed="2.001113"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:02.986995" elapsed="4.247076"/>
+</kw>
+<kw name="E acessa a tela de notificações">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:07.235244" level="INFO">Opening url 'http://127.0.0.1:8080/notificacoes.html'</msg>
+<arg>${URL_NOTIFICACOES}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-03T00:26:07.235089" elapsed="0.044453"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LISTA_NOTIFICACOES}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:07.279735" elapsed="0.667843"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T00:26:08.948779" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T00:26:07.947770" elapsed="1.001135"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:07.234709" elapsed="1.714309"/>
+</kw>
+<kw name="Quando selecionar a opção Tomado">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${BOTAO_TOMADO}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:08.949932" elapsed="0.020629"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:08.971120" level="INFO">Clicking button 'xpath=//button[contains(@onclick, "registrarStatus") and contains(@onclick, "'16'") and contains(@onclick, "Tomado")]'.</msg>
+<arg>${BOTAO_TOMADO}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:08.970751" elapsed="0.081252"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:08.949518" elapsed="0.102633"/>
+</kw>
+<kw name="Então o sistema deve apresentar mensagem de status registrado com sucesso">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${MENSAGEM_STATUS}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:09.053526" elapsed="0.235934"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:09.312561" level="INFO">Element 'xpath=(.//*[normalize-space(text()) and normalize-space(.)='✅'])[1]/following::span[1]' contains text 'Status registrado com sucesso'.</msg>
+<arg>${MENSAGEM_STATUS}</arg>
+<arg>Status registrado com sucesso</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-06-03T00:26:09.289664" elapsed="0.022994"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:09.053082" elapsed="0.259677"/>
+</kw>
+<kw name="E fecha o navegador" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-06-03T00:26:09.313654" elapsed="2.372686"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:09.313353" elapsed="2.373131"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:02.985712" elapsed="8.701068"/>
+</test>
+<test id="s1-t2" name="CT02 - Deve registrar medicamento como Pular pela tela de notificações" line="36">
+<kw name="Dado que o usuário está autenticado com medicamento cadastrado">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:11.689023" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:8080/index.html'.</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-03T00:26:11.688814" elapsed="1.214168"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-03T00:26:12.903191" elapsed="0.022899"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${INPUT_EMAIL}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:12.926268" elapsed="0.467733"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:13.394502" level="INFO">Typing text 'matheus@email.com' into text field 'id=email'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${EMAIL_COM_MEDICAMENTO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:13.394183" elapsed="0.114902"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:13.509609" level="INFO">Typing password into text field 'id=senha'.</msg>
+<msg time="2026-06-03T00:26:13.544804" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_SENHA}</arg>
+<arg>${SENHA_COM_MEDICAMENTO}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:13.509260" elapsed="0.091000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:13.600740" level="INFO">Clicking button 'xpath=//button[contains(., "Entrar")]'.</msg>
+<arg>${BOTAO_ENTRAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:13.600455" elapsed="0.089423"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T00:26:15.691153" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T00:26:13.690095" elapsed="2.001169"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:11.688529" elapsed="4.002842"/>
+</kw>
+<kw name="E acessa a tela de notificações">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:15.692452" level="INFO">Opening url 'http://127.0.0.1:8080/notificacoes.html'</msg>
+<arg>${URL_NOTIFICACOES}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-03T00:26:15.692298" elapsed="0.044574"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LISTA_NOTIFICACOES}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:15.737041" elapsed="0.667531"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T00:26:17.405750" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T00:26:16.404740" elapsed="1.001119"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:15.691932" elapsed="1.714031"/>
+</kw>
+<kw name="Quando selecionar a opção Pular">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${BOTAO_PULAR}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:17.407044" elapsed="0.019269"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:17.427310" level="INFO">Clicking button 'xpath=//button[contains(@onclick, "registrarStatus") and contains(@onclick, "'16'") and contains(@onclick, "Pular")]'.</msg>
+<arg>${BOTAO_PULAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:17.426604" elapsed="0.084682"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:17.406462" elapsed="0.104971"/>
+</kw>
+<kw name="Então o sistema deve apresentar mensagem de status registrado com sucesso">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${MENSAGEM_STATUS}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:17.513174" elapsed="0.235890"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:17.773808" level="INFO">Element 'xpath=(.//*[normalize-space(text()) and normalize-space(.)='✅'])[1]/following::span[1]' contains text 'Status registrado com sucesso'.</msg>
+<arg>${MENSAGEM_STATUS}</arg>
+<arg>Status registrado com sucesso</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-06-03T00:26:17.749247" elapsed="0.024659"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:17.512723" elapsed="0.261283"/>
+</kw>
+<kw name="E fecha o navegador" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-06-03T00:26:17.774740" elapsed="2.240994"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:17.774456" elapsed="2.241432"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:11.687864" elapsed="8.328326"/>
+</test>
+<test id="s1-t3" name="CT03 - Deve informar quando não houver medicamento cadastrado" line="42">
+<kw name="Dado que o usuário está autenticado sem medicamento cadastrado">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:20.018217" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:8080/index.html'.</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-03T00:26:20.018012" elapsed="1.396549"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-03T00:26:21.414794" elapsed="0.030582"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${INPUT_EMAIL}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:21.445657" elapsed="0.460982"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:21.907151" level="INFO">Typing text 'usuariosh@email.com' into text field 'id=email'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${EMAIL_SEM_MEDICAMENTO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:21.906818" elapsed="0.113520"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:22.020842" level="INFO">Typing password into text field 'id=senha'.</msg>
+<msg time="2026-06-03T00:26:22.055638" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_SENHA}</arg>
+<arg>${SENHA_SEM_MEDICAMENTO}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:22.020516" elapsed="0.094174"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:22.115159" level="INFO">Clicking button 'xpath=//button[contains(., "Entrar")]'.</msg>
+<arg>${BOTAO_ENTRAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T00:26:22.114878" elapsed="0.082995"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T00:26:24.199175" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T00:26:22.198082" elapsed="2.001253"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:20.017731" elapsed="4.181771"/>
+</kw>
+<kw name="E acessa a tela de notificações">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:24.200618" level="INFO">Opening url 'http://127.0.0.1:8080/notificacoes.html'</msg>
+<arg>${URL_NOTIFICACOES}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-03T00:26:24.200471" elapsed="0.058076"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LISTA_NOTIFICACOES}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T00:26:24.258717" elapsed="0.667887"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T00:26:25.927616" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T00:26:24.926808" elapsed="1.000931"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:24.200062" elapsed="1.727802"/>
+</kw>
+<kw name="Então o sistema deve apresentar mensagem de nenhum medicamento cadastrado">
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Nenhum medicamento cadastrado</arg>
+<arg>10s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-06-03T00:26:25.928730" elapsed="0.012814"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:25.928359" elapsed="0.013331"/>
+</kw>
+<kw name="E fecha o navegador" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-06-03T00:26:25.943053" elapsed="2.241605"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:25.942373" elapsed="2.242406"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:20.017030" elapsed="8.168048"/>
+</test>
+<test id="s1-t4" name="CT04 - Deve bloquear acesso sem autenticação" line="47">
+<kw name="Dado que o usuário não está autenticado">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:28.187325" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:8080/notificacoes.html'.</msg>
+<arg>${URL_NOTIFICACOES}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-03T00:26:28.187118" elapsed="0.955044"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-03T00:26:29.142367" elapsed="0.429186"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:29.571965" level="INFO">Executing JavaScript:
+localStorage.removeItem("token"); localStorage.removeItem("usuario"); localStorage.removeItem("token_tanahora"); localStorage.removeItem("usuario_tanahora");
+Without any arguments.</msg>
+<arg>localStorage.removeItem("token"); localStorage.removeItem("usuario"); localStorage.removeItem("token_tanahora"); localStorage.removeItem("usuario_tanahora");</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2026-06-03T00:26:29.571748" elapsed="0.005800"/>
+</kw>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2026-06-03T00:26:29.577722" elapsed="0.028487"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T00:26:30.607231" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T00:26:29.606396" elapsed="1.000942"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:28.186811" elapsed="2.420641"/>
+</kw>
+<kw name="Quando acessar diretamente a tela de notificações">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:30.608449" level="INFO">Opening url 'http://127.0.0.1:8080/notificacoes.html'</msg>
+<arg>${URL_NOTIFICACOES}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-03T00:26:30.608312" elapsed="0.043398"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T00:26:32.653615" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T00:26:30.652046" elapsed="2.001698"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:30.607941" elapsed="2.045907"/>
+</kw>
+<kw name="Então o sistema deve redirecionar para a tela de login">
+<kw name="Location Should Contain" owner="SeleniumLibrary">
+<msg time="2026-06-03T00:26:32.661626" level="INFO">Current location contains 'index.html'.</msg>
+<arg>index.html</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-06-03T00:26:32.654537" elapsed="0.007182"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:32.654198" elapsed="0.007619"/>
+</kw>
+<kw name="E fecha o navegador" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-06-03T00:26:32.662670" elapsed="2.227413"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:32.662252" elapsed="2.227981"/>
+</kw>
+<status status="PASS" start="2026-06-03T00:26:28.186069" elapsed="6.704442"/>
+</test>
+<status status="PASS" start="2026-06-03T00:26:02.528897" elapsed="32.362910"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Notificacoes" id="s1" pass="4" fail="0" skip="0">Notificacoes</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

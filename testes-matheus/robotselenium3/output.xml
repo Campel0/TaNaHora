@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.14.0 on win32)" generated="2026-06-04T23:28:42.171993" rpa="false" schemaversion="5">
+<suite id="s1" name="Ct Mat 01 Notificacao" source="C:\Users\Windows\Documents\GitHub\TaNaHora\testes-matheus\robotselenium3\ct_mat_01_notificacao.robot">
+<test id="s1-t1" name="CT-MAT-01 - Aviso nao deve aparecer antes do horario configurado" line="38">
+<kw name="Dado que o usuário está autenticado">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:42.904592" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:8080/index.html'.</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-04T23:28:42.904267" elapsed="2.438143"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-04T23:28:45.342658" elapsed="0.044378"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${INPUT_EMAIL}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-04T23:28:45.387262" elapsed="0.337105"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:45.724901" level="INFO">Typing text 'matheus@email.com' into text field 'id=email'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${EMAIL}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:45.724562" elapsed="0.121115"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:45.846233" level="INFO">Typing password into text field 'id=senha'.</msg>
+<msg time="2026-06-04T23:28:45.873890" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_SENHA}</arg>
+<arg>${SENHA}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:45.845877" elapsed="0.093184"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:45.939533" level="INFO">Clicking button 'xpath=//button[contains(., "Entrar")]'.</msg>
+<arg>${BOTAO_ENTRAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:45.939250" elapsed="0.102466"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-04T23:28:48.043155" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-04T23:28:46.041920" elapsed="2.001348"/>
+</kw>
+<status status="PASS" start="2026-06-04T23:28:42.903383" elapsed="5.140002"/>
+</kw>
+<kw name="E cadastra um medicamento com horário futuro">
+<kw name="Gerar horario futuro">
+<kw name="Get Time" owner="BuiltIn">
+<msg time="2026-06-04T23:28:48.044834" level="INFO">${agora} = 1780626528</msg>
+<var>${agora}</var>
+<arg>epoch</arg>
+<doc>Returns the given time in the requested format.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.044450" elapsed="0.000422"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-04T23:28:48.045609" level="INFO">${futuro} = 1780627128</msg>
+<var>${futuro}</var>
+<arg>int(${agora}) + 600</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.045000" elapsed="0.000653"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-04T23:28:48.047793" level="INFO">${hora} = 23:38</msg>
+<var>${hora}</var>
+<arg>__import__('datetime').datetime.fromtimestamp(${futuro}).strftime('%H:%M')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.046420" elapsed="0.001436"/>
+</kw>
+<return>
+<value>${hora}</value>
+<status status="PASS" start="2026-06-04T23:28:48.048038" elapsed="0.000121"/>
+</return>
+<msg time="2026-06-04T23:28:48.048709" level="INFO">${hora_futura} = 23:38</msg>
+<var>${hora_futura}</var>
+<status status="PASS" start="2026-06-04T23:28:48.044206" elapsed="0.004629"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-06-04T23:28:48.050366" level="INFO">${HORARIO_FUTURO} = 23:38</msg>
+<arg>${HORARIO_FUTURO}</arg>
+<arg>${hora_futura}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.049099" elapsed="0.001338"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:48.050749" level="INFO">Opening url 'http://127.0.0.1:8080/medicamentos.html'</msg>
+<arg>${URL_MEDICAMENTOS}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.050593" elapsed="0.050533"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${INPUT_NOME}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.101328" elapsed="0.674748"/>
+</kw>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${INPUT_NOME}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.776256" elapsed="0.035886"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:48.813473" level="INFO">Typing text 'medicamento' into text field 'id=nome'.</msg>
+<arg>${INPUT_NOME}</arg>
+<arg>${NOME_MEDICAMENTO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.812435" elapsed="0.093827"/>
+</kw>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${INPUT_DOSAGEM}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.906467" elapsed="0.031918"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:48.938902" level="INFO">Typing text '500mg' into text field 'id=dosagem'.</msg>
+<arg>${INPUT_DOSAGEM}</arg>
+<arg>${DOSAGEM}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:48.938570" elapsed="0.068857"/>
+</kw>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${INPUT_INTERVALO}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:49.007627" elapsed="0.034369"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:49.042534" level="INFO">Typing text '8h' into text field 'id=intervalo'.</msg>
+<arg>${INPUT_INTERVALO}</arg>
+<arg>${INTERVALO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:49.042190" elapsed="0.067639"/>
+</kw>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${INPUT_HORA_INICIO}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:49.110028" elapsed="0.033640"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:49.144177" level="INFO">Typing text '23:38' into text field 'id=horaInicio'.</msg>
+<arg>${INPUT_HORA_INICIO}</arg>
+<arg>${HORARIO_FUTURO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:49.143851" elapsed="0.063685"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:49.208025" level="INFO">Clicking button 'xpath=//button[@onclick='cadastrarMedicamento()']'.</msg>
+<arg>${BOTAO_CADASTRAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:49.207725" elapsed="0.068981"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-04T23:28:51.277935" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-04T23:28:49.276967" elapsed="2.001093"/>
+</kw>
+<status status="PASS" start="2026-06-04T23:28:48.043788" elapsed="3.234450"/>
+</kw>
+<kw name="Quando acessar a tela de notificações antes do horário configurado">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:51.279661" level="INFO">Opening url 'http://127.0.0.1:8080/notificacoes.html'</msg>
+<arg>${URL_NOTIFICACOES}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-04T23:28:51.279400" elapsed="0.051544"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LISTA_NOTIFICACOES}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-04T23:28:51.331141" elapsed="0.670314"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-04T23:28:54.002909" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-04T23:28:52.001630" elapsed="2.001391"/>
+</kw>
+<status status="PASS" start="2026-06-04T23:28:51.278796" elapsed="2.724328"/>
+</kw>
+<kw name="Então o aviso do medicamento não deve aparecer antes do horário">
+<kw name="Element Should Not Contain" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:54.317484" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-06-04T23:28:54.317678" level="FAIL">Element 'id=listaNotificacoes' should not contain text 'medicamento' but it did.</msg>
+<arg>${LISTA_NOTIFICACOES}</arg>
+<arg>${NOME_MEDICAMENTO}</arg>
+<doc>Verifies that element ``locator`` does not contain text ``expected``.</doc>
+<status status="FAIL" start="2026-06-04T23:28:54.003802" elapsed="0.390687">Element 'id=listaNotificacoes' should not contain text 'medicamento' but it did.</status>
+</kw>
+<status status="FAIL" start="2026-06-04T23:28:54.003475" elapsed="0.391246">Element 'id=listaNotificacoes' should not contain text 'medicamento' but it did.</status>
+</kw>
+<kw name="Fechar navegador" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-06-04T23:28:54.395763" elapsed="2.292440"/>
+</kw>
+<status status="PASS" start="2026-06-04T23:28:54.395413" elapsed="2.292927"/>
+</kw>
+<doc>Valida se um medicamento cadastrado com horário futuro aparece indevidamente na tela de avisos antes do horário.</doc>
+<status status="FAIL" start="2026-06-04T23:28:42.902188" elapsed="13.786353">Element 'id=listaNotificacoes' should not contain text 'medicamento' but it did.</status>
+</test>
+<test id="s1-t2" name="CT-MAT-01B - Aviso deve sair apos selecionar Tomado" line="45">
+<kw name="Dado que o usuário está autenticado">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:56.690491" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:8080/index.html'.</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-04T23:28:56.690250" elapsed="1.304591"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-04T23:28:57.995061" elapsed="0.051373"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${INPUT_EMAIL}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-04T23:28:58.047013" elapsed="0.453472"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:58.501035" level="INFO">Typing text 'matheus@email.com' into text field 'id=email'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${EMAIL}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:58.500681" elapsed="0.112230"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:58.613468" level="INFO">Typing password into text field 'id=senha'.</msg>
+<msg time="2026-06-04T23:28:58.648801" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_SENHA}</arg>
+<arg>${SENHA}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:58.613114" elapsed="0.087439"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:28:58.701043" level="INFO">Clicking button 'xpath=//button[contains(., "Entrar")]'.</msg>
+<arg>${BOTAO_ENTRAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:28:58.700743" elapsed="0.092469"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-04T23:29:00.793939" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-04T23:28:58.793424" elapsed="2.000627"/>
+</kw>
+<status status="PASS" start="2026-06-04T23:28:56.689963" elapsed="4.104194"/>
+</kw>
+<kw name="E cadastra um medicamento com horário futuro">
+<kw name="Gerar horario futuro">
+<kw name="Get Time" owner="BuiltIn">
+<msg time="2026-06-04T23:29:00.795648" level="INFO">${agora} = 1780626540</msg>
+<var>${agora}</var>
+<arg>epoch</arg>
+<doc>Returns the given time in the requested format.</doc>
+<status status="PASS" start="2026-06-04T23:29:00.795289" elapsed="0.000397"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-04T23:29:00.796242" level="INFO">${futuro} = 1780627140</msg>
+<var>${futuro}</var>
+<arg>int(${agora}) + 600</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-04T23:29:00.795832" elapsed="0.000447"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-04T23:29:00.796785" level="INFO">${hora} = 23:39</msg>
+<var>${hora}</var>
+<arg>__import__('datetime').datetime.fromtimestamp(${futuro}).strftime('%H:%M')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-04T23:29:00.796400" elapsed="0.000445"/>
+</kw>
+<return>
+<value>${hora}</value>
+<status status="PASS" start="2026-06-04T23:29:00.796986" elapsed="0.000076"/>
+</return>
+<msg time="2026-06-04T23:29:00.801427" level="INFO">${hora_futura} = 23:39</msg>
+<var>${hora_futura}</var>
+<status status="PASS" start="2026-06-04T23:29:00.795045" elapsed="0.006445"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-06-04T23:29:00.803544" level="INFO">${HORARIO_FUTURO} = 23:39</msg>
+<arg>${HORARIO_FUTURO}</arg>
+<arg>${hora_futura}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-06-04T23:29:00.801692" elapsed="0.001962"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:29:00.804145" level="INFO">Opening url 'http://127.0.0.1:8080/medicamentos.html'</msg>
+<arg>${URL_MEDICAMENTOS}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-04T23:29:00.803923" elapsed="0.039256"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${INPUT_NOME}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-04T23:29:00.843378" elapsed="0.667435"/>
+</kw>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${INPUT_NOME}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:01.510990" elapsed="0.034533"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:29:01.546094" level="INFO">Typing text 'medicamento' into text field 'id=nome'.</msg>
+<arg>${INPUT_NOME}</arg>
+<arg>${NOME_MEDICAMENTO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:01.545766" elapsed="0.091036"/>
+</kw>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${INPUT_DOSAGEM}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:01.637187" elapsed="0.035509"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:29:01.673752" level="INFO">Typing text '500mg' into text field 'id=dosagem'.</msg>
+<arg>${INPUT_DOSAGEM}</arg>
+<arg>${DOSAGEM}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:01.672948" elapsed="0.076541"/>
+</kw>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${INPUT_INTERVALO}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:01.749676" elapsed="0.031598"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:29:01.781799" level="INFO">Typing text '8h' into text field 'id=intervalo'.</msg>
+<arg>${INPUT_INTERVALO}</arg>
+<arg>${INTERVALO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:01.781458" elapsed="0.065586"/>
+</kw>
+<kw name="Clear Element Text" owner="SeleniumLibrary">
+<arg>${INPUT_HORA_INICIO}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:01.847236" elapsed="0.033007"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:29:01.880757" level="INFO">Typing text '23:39' into text field 'id=horaInicio'.</msg>
+<arg>${INPUT_HORA_INICIO}</arg>
+<arg>${HORARIO_FUTURO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:01.880429" elapsed="0.064843"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:29:01.945744" level="INFO">Clicking button 'xpath=//button[@onclick='cadastrarMedicamento()']'.</msg>
+<arg>${BOTAO_CADASTRAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:01.945460" elapsed="0.069810"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-04T23:29:04.016643" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-04T23:29:02.015458" elapsed="2.001564"/>
+</kw>
+<status status="PASS" start="2026-06-04T23:29:00.794666" elapsed="3.222500"/>
+</kw>
+<kw name="Quando acessar a tela de notificações">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:29:04.019052" level="INFO">Opening url 'http://127.0.0.1:8080/notificacoes.html'</msg>
+<arg>${URL_NOTIFICACOES}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-04T23:29:04.018492" elapsed="0.024743"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LISTA_NOTIFICACOES}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-04T23:29:04.043509" elapsed="0.688120"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-04T23:29:06.733028" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-04T23:29:04.731958" elapsed="2.001305"/>
+</kw>
+<status status="PASS" start="2026-06-04T23:29:04.017967" elapsed="2.715737"/>
+</kw>
+<kw name="E selecionar a opção Tomado">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${BOTAO_TOMADO}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-04T23:29:06.736559" elapsed="0.025234"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:29:06.762399" level="INFO">Clicking button 'xpath=//button[contains(@onclick, "registrarStatus") and contains(@onclick, "Tomado")]'.</msg>
+<arg>${BOTAO_TOMADO}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-04T23:29:06.762061" elapsed="0.107662"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-04T23:29:08.871029" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-04T23:29:06.869947" elapsed="2.001238"/>
+</kw>
+<status status="PASS" start="2026-06-04T23:29:06.736222" elapsed="2.135115"/>
+</kw>
+<kw name="Então o aviso do medicamento deve deixar de aparecer">
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2026-06-04T23:29:08.872282" elapsed="0.036022"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LISTA_NOTIFICACOES}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-04T23:29:08.908488" elapsed="0.662744"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-04T23:29:11.572630" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-04T23:29:09.571419" elapsed="2.001329"/>
+</kw>
+<kw name="Element Should Not Contain" owner="SeleniumLibrary">
+<msg time="2026-06-04T23:29:11.873934" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-06-04T23:29:11.874101" level="FAIL">Element 'id=listaNotificacoes' should not contain text 'medicamento' but it did.</msg>
+<arg>${LISTA_NOTIFICACOES}</arg>
+<arg>${NOME_MEDICAMENTO}</arg>
+<doc>Verifies that element ``locator`` does not contain text ``expected``.</doc>
+<status status="FAIL" start="2026-06-04T23:29:11.572921" elapsed="0.302624">Element 'id=listaNotificacoes' should not contain text 'medicamento' but it did.</status>
+</kw>
+<status status="FAIL" start="2026-06-04T23:29:08.871861" elapsed="3.004199">Element 'id=listaNotificacoes' should not contain text 'medicamento' but it did.</status>
+</kw>
+<kw name="Fechar navegador" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-06-04T23:29:11.879956" elapsed="2.326603"/>
+</kw>
+<status status="PASS" start="2026-06-04T23:29:11.878944" elapsed="2.327767"/>
+</kw>
+<doc>Valida se o aviso deixa de aparecer após o usuário registrar o medicamento como Tomado.</doc>
+<status status="FAIL" start="2026-06-04T23:28:56.689300" elapsed="17.517805">Element 'id=listaNotificacoes' should not contain text 'medicamento' but it did.</status>
+</test>
+<doc>CT-MAT-01 - Validação da exibição do aviso de medicamento no horário configurado.</doc>
+<status status="FAIL" start="2026-06-04T23:28:42.173762" elapsed="32.034553"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Ct Mat 01 Notificacao" id="s1" pass="0" fail="2" skip="0">Ct Mat 01 Notificacao</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

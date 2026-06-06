@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.14.0 on win32)" generated="2026-06-03T15:23:00.333328" rpa="false" schemaversion="5">
+<suite id="s1" name="Historico" source="C:\Users\Windows\Documents\GitHub\TaNaHora\testes-matheus\robotselenium2\historico.robot">
+<test id="s1-t1" name="CT01 - Deve exibir pelo menos um item no histórico" line="26">
+<kw name="Dado que o usuário está autenticado com histórico existente">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:00.795486" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:8080/index.html'.</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-03T15:23:00.795204" elapsed="1.441210"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-03T15:23:02.236738" elapsed="0.036235"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${INPUT_EMAIL}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T15:23:02.273219" elapsed="0.461654"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:02.735569" level="INFO">Typing text 'matheus@email.com' into text field 'id=email'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${EMAIL_COM_HISTORICO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T15:23:02.735063" elapsed="0.117021"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:02.852627" level="INFO">Typing password into text field 'id=senha'.</msg>
+<msg time="2026-06-03T15:23:02.887289" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_SENHA}</arg>
+<arg>${SENHA_COM_HISTORICO}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T15:23:02.852292" elapsed="0.086256"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:02.940118" level="INFO">Clicking button 'xpath=//button[contains(., "Entrar")]'.</msg>
+<arg>${BOTAO_ENTRAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T15:23:02.939004" elapsed="0.087280"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T15:23:05.027453" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T15:23:03.026490" elapsed="2.001078"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:00.794419" elapsed="4.233265"/>
+</kw>
+<kw name="Quando acessar a tela de histórico">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:05.028686" level="INFO">Opening url 'http://127.0.0.1:8080/historico.html'</msg>
+<arg>${URL_HISTORICO}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-03T15:23:05.028526" elapsed="0.037860"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LISTA_HISTORICO}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T15:23:05.066611" elapsed="0.667159"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T15:23:06.734885" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T15:23:05.733966" elapsed="1.001107"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:05.028173" elapsed="1.707169"/>
+</kw>
+<kw name="Então o sistema deve exibir pelo menos um item no histórico">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${ITEM_HISTORICO}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T15:23:06.736948" elapsed="0.022719"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:06.770797" level="INFO">Current page contains element 'xpath=//ul[@id='lista']/li'.</msg>
+<arg>${ITEM_HISTORICO}</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2026-06-03T15:23:06.759858" elapsed="0.011065"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:06.736399" elapsed="0.034639"/>
+</kw>
+<kw name="E fecha o navegador" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-06-03T15:23:06.772390" elapsed="2.423694"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:06.771717" elapsed="2.424487"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:00.793383" elapsed="8.403125"/>
+</test>
+<test id="s1-t2" name="CT02 - Deve validar ausência de itens no histórico" line="31">
+<kw name="Dado que o usuário está autenticado sem histórico existente">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:09.198850" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:8080/index.html'.</msg>
+<arg>${URL_LOGIN}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-03T15:23:09.198635" elapsed="1.338281"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-03T15:23:10.537115" elapsed="0.026407"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${INPUT_EMAIL}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T15:23:10.563697" elapsed="0.456365"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:11.020575" level="INFO">Typing text 'usuariosh@email.com' into text field 'id=email'.</msg>
+<arg>${INPUT_EMAIL}</arg>
+<arg>${EMAIL_SEM_HISTORICO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T15:23:11.020255" elapsed="0.110069"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:11.132538" level="INFO">Typing password into text field 'id=senha'.</msg>
+<msg time="2026-06-03T15:23:11.170227" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${INPUT_SENHA}</arg>
+<arg>${SENHA_SEM_HISTORICO}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T15:23:11.131272" elapsed="0.094290"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:11.226052" level="INFO">Clicking button 'xpath=//button[contains(., "Entrar")]'.</msg>
+<arg>${BOTAO_ENTRAR}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-03T15:23:11.225752" elapsed="0.084817"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T15:23:13.312421" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T15:23:11.310808" elapsed="2.001807"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:09.198342" elapsed="4.114526"/>
+</kw>
+<kw name="Quando acessar a tela de histórico">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:13.314744" level="INFO">Opening url 'http://127.0.0.1:8080/historico.html'</msg>
+<arg>${URL_HISTORICO}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-03T15:23:13.314473" elapsed="0.043677"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LISTA_HISTORICO}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T15:23:13.358328" elapsed="0.669923"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T15:23:15.029882" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T15:23:14.028741" elapsed="1.001331"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:13.313843" elapsed="1.716367"/>
+</kw>
+<kw name="Então o sistema não deve exibir itens de histórico">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LISTA_HISTORICO}</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-03T15:23:15.031197" elapsed="0.017174"/>
+</kw>
+<kw name="Page Should Not Contain Element" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:15.247538" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-06-03T15:23:15.248095" level="FAIL">Page should not have contained element 'xpath=//ul[@id='lista']/li'.</msg>
+<arg>${ITEM_HISTORICO}</arg>
+<doc>Verifies that element ``locator`` is not found on the current page.</doc>
+<status status="FAIL" start="2026-06-03T15:23:15.048553" elapsed="0.203201">Page should not have contained element 'xpath=//ul[@id='lista']/li'.</status>
+</kw>
+<status status="FAIL" start="2026-06-03T15:23:15.030681" elapsed="0.221264">Page should not have contained element 'xpath=//ul[@id='lista']/li'.</status>
+</kw>
+<kw name="E fecha o navegador" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-06-03T15:23:15.252966" elapsed="2.255049"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:15.252677" elapsed="2.255489"/>
+</kw>
+<status status="FAIL" start="2026-06-03T15:23:09.197593" elapsed="8.310766">Page should not have contained element 'xpath=//ul[@id='lista']/li'.</status>
+</test>
+<test id="s1-t3" name="CT03 - Deve bloquear acesso ao histórico sem autenticação" line="36">
+<kw name="Dado que o usuário não está autenticado">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:17.510054" level="INFO">Opening browser 'chrome' to base url 'http://127.0.0.1:8080/historico.html'.</msg>
+<arg>${URL_HISTORICO}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-03T15:23:17.509791" elapsed="1.235673"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-03T15:23:18.745688" elapsed="0.034037"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:18.780098" level="INFO">Executing JavaScript:
+localStorage.removeItem("token"); localStorage.removeItem("usuario"); localStorage.removeItem("token_tanahora"); localStorage.removeItem("usuario_tanahora");
+Without any arguments.</msg>
+<arg>localStorage.removeItem("token"); localStorage.removeItem("usuario"); localStorage.removeItem("token_tanahora"); localStorage.removeItem("usuario_tanahora");</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2026-06-03T15:23:18.779908" elapsed="0.007724"/>
+</kw>
+<kw name="Reload Page" owner="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" start="2026-06-03T15:23:18.787844" elapsed="0.035273"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T15:23:19.825148" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T15:23:18.823308" elapsed="1.001955"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:17.509463" elapsed="2.315911"/>
+</kw>
+<kw name="Quando acessar diretamente a tela de histórico">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:19.826676" level="INFO">Opening url 'http://127.0.0.1:8080/historico.html'</msg>
+<arg>${URL_HISTORICO}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2026-06-03T15:23:19.826395" elapsed="0.044286"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-03T15:23:21.872472" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-03T15:23:19.871000" elapsed="2.001646"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:19.825837" elapsed="2.047028"/>
+</kw>
+<kw name="Então o sistema deve redirecionar para a tela de login">
+<kw name="Location Should Contain" owner="SeleniumLibrary">
+<msg time="2026-06-03T15:23:21.887834" level="INFO">Current location contains 'index.html'.</msg>
+<arg>index.html</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-06-03T15:23:21.880594" elapsed="0.007369"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:21.873572" elapsed="0.014656"/>
+</kw>
+<kw name="E fecha o navegador" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-06-03T15:23:21.890275" elapsed="2.211689"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:21.889898" elapsed="2.212184"/>
+</kw>
+<status status="PASS" start="2026-06-03T15:23:17.508920" elapsed="6.593505"/>
+</test>
+<status status="FAIL" start="2026-06-03T15:23:00.335653" elapsed="23.767994"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Historico" id="s1" pass="2" fail="1" skip="0">Historico</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
